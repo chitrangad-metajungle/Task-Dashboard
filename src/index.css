@@ -1,0 +1,120 @@
+body {
+  font-family: sans-serif;
+  margin-left: 0.5rem;
+  padding: 0;
+  background-color: whitesmoke;
+}
+
+h1, h2, h3, h4 {
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+form {
+  margin-bottom: 1rem;
+}
+
+input,
+select,
+textarea {
+  display: flex;
+  margin-bottom: 0.5rem;
+  width: 20%;
+  margin-left: 0.18rem;
+  padding: 0.4rem;
+  border: 1px solid #097969;
+  border-radius: 4px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #097969;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: white;
+  color:#097969;
+  border: 1px solid #097969;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #097969;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.header {
+  display: flex; 
+	flex-direction: row; 
+	flex-wrap: wrap; 
+}
+
+.task-item {
+  position: relative;
+}
+
+.delete-task-button {
+  background-color: darkred;
+  padding: 0.1rem 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.notes-section {
+  background-color: #f2f2f2;
+  padding: 10px;
+  margin: 5px 0;
+  cursor: move;
+  border: 1px solid #097969;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.user-buttons button {
+  padding: 5px 10px;
+  background-color: white;
+  border: 1px solid #097969;
+  color:#097969;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.user-buttons button:hover {
+  background-color:#097969;
+  color: white;
+}
+
+.user-buttons button.active {
+  background-color:#097969;
+  color: white;
+}
+
+.flex-container { 
+  display: grid;
+  grid-template-columns: 5fr 5fr; 
+  grid-gap: 7px;
+  width: 100%; 
+} 
+.flex-child { 
+  margin: 10px; 
+}
+

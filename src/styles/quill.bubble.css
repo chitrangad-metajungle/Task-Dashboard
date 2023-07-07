@@ -1,0 +1,15 @@
+/* Custom CSS */
+.quill-container .ql-editor {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Custom CSS */
+.ql-editor {
+  padding: 1rem;
+}
+
+/* Custom CSS */
+.ql-tooltip {
+  display: none !important;
+}
