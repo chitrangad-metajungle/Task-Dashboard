@@ -17,7 +17,7 @@ async function main(){
    * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
    * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
    */
-  const uri = "mongodb://localhost:27017";
+  const uri = "mongodb://localhost:27017/";
   const MongoClient = require('mongodb').MongoClient;
 
 
@@ -26,19 +26,10 @@ async function main(){
       // Connect to the MongoDB cluster
       await client.connect();
       db = client.db("TaskManagerDB")
-      // console.log(db)
-      db.collection('users').find({}, function(err, result) {
-        if (err) throw err;
-        console.log("sadghsajdhsakdajkhdjahjk");
-        console.log(result.name);
-        client.close();
-      });
-      // Make the appropriate DB calls
-      db.collection("users").findOne({}, function(err, result) {
-        if (err) throw err;
-        console.log(result.name);
-        db.close();
-      });
+      var myobj = { name: "Company Inc", address: "Highway 37" };
+      const result = await db.collection("users").find({}).toArray();
+
+      console.log('Query result:', result);
 
   } catch (e) {
       console.error(e);
