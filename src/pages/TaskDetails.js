@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NoteForm from "../components/NoteForm";
 import ReactQuill from "react-quill";
-import "/Users/chitrangadsingh/Desktop/MetaJungle/task-desk/src/styles/quill.bubble.css";
+import "../styles/quill.bubble.css";
 
 function calculateTimeLeft(completionDate) {
   const currentDate = new Date();

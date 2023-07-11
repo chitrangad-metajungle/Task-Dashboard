@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
-import "/Users/chitrangadsingh/Desktop/MetaJungle/task-desk/src/styles/quill.bubble.css";
+import "../styles/quill.bubble.css";
 
 const NoteForm = ({ addNote }) => {
   const [noteText, setNoteText] = useState("");
