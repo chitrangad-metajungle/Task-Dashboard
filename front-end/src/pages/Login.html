@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login/Signup Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 10px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 5px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      border: none;
+      color: #ffffff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .form-group button:hover {
+      background-color: #45a049;
+    }
+    .form-group .error-message {
+      color: #ff0000;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login/Signup</h2>
+    <div id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail">Email:</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password">
+      </div>
+      <div class="form-group">
+        <button onclick="login()">Login</button>
+      </div>
+      <div class="form-group">
+        <p>Don't have an account? <a href="#" onclick="showSignupForm()">Sign up</a></p>
+      </div>
+    </div>
+    <div id="signupForm" style="display: none;">
+      <div class="form-group">
+        <label for="signupName">Name:</label>
+        <input type="text" id="signupName" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="signupEmail">Email:</label>
+        <input type="email" id="signupEmail" placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label for="signupPassword">Password:</label>
+        <input type="password" id="signupPassword" placeholder="Enter your password">
+      </div>
+      <div class="form-group">
+        <button onclick="signup()">Signup</button>
+      </div>
+      <div class="form-group">
+        <p>Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSignupForm() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('signupForm').style.display = 'block';
+    }
+
+    function showLoginForm() {
+      document.getElementById('signupForm').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+    }
+
+    function login() {
+      var email = document.getElementById('loginEmail').value;
+      var password = document.getElementById('loginPassword').value;
+
+      // Perform login logic here
+      // For example, you can send an AJAX request to a server-side script to validate the login credentials
+
+      // Placeholder alert message
+      alert('Login successful!');
+    }
+
+    function signup() {
+      var name = document.getElementById('signupName').value;
+      var email = document.getElementById('signupEmail').value;
+      var password = document.getElementById('signupPassword').value;
+
+      // Perform signup logic here
+      // For example, you can send an AJAX request to a server-side script to create a new user account
+
+      // Placeholder alert message
+      alert('Signup successful!');
+    }
+  </script>
+  </script>
+  </script>
+</body>
+</html>
