@@ -5,29 +5,29 @@ import TaskDetails from "./pages/TaskDetails";
 import Login from "./pages/Login";
 
 const App = () => {
-    const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
-    const addTask = (newTask) => {
-        setTasks([...tasks, newTask]);
-    };
+  const addTask = (newTask) => {
+    setTasks([...tasks, newTask]);
+  };
 
-    return (
-        <Router>
-            <div>
-                <Routes>
-                    <Route
-                        path="/"
-                        element={<Dashboard addTask={addTask} tasks={tasks} />}
-                    />
-                    <Route
-                        path="/tasks/:taskId"
-                        element={<TaskDetails tasks={tasks} />}
-                    />
-                    <Route path="/login" element={<Login />} />
-                </Routes>
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div>
+        <Routes>
+          <Route
+            path="/"
+            element={<Dashboard addTask={addTask} tasks={tasks} />}
+          />
+          <Route
+            path="/tasks/:taskId"
+            element={<TaskDetails tasks={tasks} />}
+          />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 };
 
 export default App;
