@@ -65,13 +65,13 @@ function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function getResult(username, password) {
-    try {
-        const result = await verifyPassword(username, password);
-        console.log(result);
-    } catch (error) {
-        console.error(error);
-    }
-}
+// async function getResult(username, password) {
+//     try {
+//         const result = await verifyPassword(username, password);
+//         console.log(result);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// }
 
-getResult("Rishabh", "12345abcde");
+// getResult("Rishabh", "12345abcde");
