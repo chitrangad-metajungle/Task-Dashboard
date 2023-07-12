@@ -29,13 +29,12 @@ async function verifyPassword(username, password) {
         const user = await collection.findOne({ username: username });
 
         if (!user) {
-            throw new Error("User not found");
+            return "User not found";
         }
 
         if (user.password === password) {
             return "Login successful";
         } else {
-            throw new Error("PASS not found");
             return "Incorrect password";
         }
     } catch (error) {
@@ -66,9 +65,13 @@ function delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function getResult() {
+async function getResult(username, password) {
     try {
-        const result = await verifyPassword();
+        const result = await verifyPassword(username, password);
         console.log(result);
-    } catch (error) {}
+    } catch (error) {
+        console.error(error);
+    }
 }
+
+getResult("Rishabh", "12345abce");
