@@ -1,49 +1,56 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 export default function Login(params) {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [FAuth, setAuth] = useState(false);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:8000/api/login", {
+        username,
+        password,
+      });
 
-        // const { username, password } = this.state;
-        console.log(username, password);
+      const data = response.data;
 
-        fetch("localhost:8000/api/login", {
-            method: "POST",
-            body: JSON.stringify({ username, password }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    window.location.href = "/";
-                } else {
-                    alert("Invalid username or password.");
-                }
-            });
-    };
+      if (data.success) {
+        setAuth(true);
+        window.location.href = "/";
+      } else {
+        alert("Invalid username or password.");
+      }
+    } catch (error) {
+      console.error("An error occurred during login:", error);
+    }
+  };
 
-    return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <input type="submit" value="Login" />
-            </form>
-            {/* <Link to="/register">Register</Link> */}
-        </div>
-    );
+  return (
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input type="submit" value="Login" />
+      </form>
+      {setAuth} && (
+      <div>
+        <p>"Email Sent"</p>
+      </div>
+      ){/* <Link to="/register">Register</Link> */}
+    </div>
+  );
 }
