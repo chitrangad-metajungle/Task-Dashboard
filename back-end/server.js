@@ -61,10 +61,6 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-function delay(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 // async function getResult(username, password) {
 //     try {
 //         const result = await verifyPassword(username, password);
