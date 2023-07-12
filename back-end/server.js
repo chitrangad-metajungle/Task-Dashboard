@@ -1,4 +1,7 @@
 const { MongoClient } = require("mongodb");
+const express = require("express");
+const cors = require("cors");
+
 const uri =
     "mongodb+srv://MetaAdmin:ql4R9W00MYgsZ3qy@taskmanager.x5nspqq.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, {
@@ -17,8 +20,10 @@ async function connectToMongoDB() {
 
 connectToMongoDB();
 
-const express = require("express");
 const app = express();
+app.use(express.json()); // This is the middleware for parsing JSON bodies
+app.use(cors()); // Enable CORS for all origins
+
 const port = 8000;
 
 async function verifyPassword(username, password) {
@@ -29,13 +34,13 @@ async function verifyPassword(username, password) {
         const user = await collection.findOne({ username: username });
 
         if (!user) {
-            return "User not found";
+            return { success: false, message: "User not found" };
         }
 
         if (user.password === password) {
-            return "Login successful";
+            return { success: true, message: "Login successful" };
         } else {
-            return "Incorrect password";
+            return { success: false, message: "Incorrect password" };
         }
     } catch (error) {
         console.error(error);
@@ -60,14 +65,3 @@ app.post("/api/login", async (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-// async function getResult(username, password) {
-//     try {
-//         const result = await verifyPassword(username, password);
-//         console.log(result);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
-
-// getResult("Rishabh", "12345abcde");
