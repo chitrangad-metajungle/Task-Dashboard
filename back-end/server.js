@@ -19,7 +19,7 @@ connectToMongoDB();
 
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 8000;
 
 async function verifyPassword(username, password) {
     const db = client.db("TaskManagerDB");
@@ -43,7 +43,7 @@ async function verifyPassword(username, password) {
     }
 }
 
-app.post("/login", async (req, res) => {
+app.post("/api/login", async (req, res) => {
     try {
         const result = await verifyPassword(
             req.body.username,
