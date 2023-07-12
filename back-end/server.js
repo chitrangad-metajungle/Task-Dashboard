@@ -26,6 +26,7 @@ app.use(cors()); // Enable CORS for all origins
 
 const port = 8000;
 
+// Verify password
 async function verifyPassword(username, password) {
     const db = client.db("TaskManagerDB");
     const collection = db.collection("users");
@@ -58,6 +59,37 @@ app.post("/api/login", async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send("An error occurred");
+    }
+});
+
+// Get all tasks
+async function getAllTasks() {
+    const db = client.db("TaskManagerDB");
+    const collection = db.collection("tasks");
+    //to do
+}
+
+//Add new task
+async function addTask(task) {
+    const db = client.db("TaskManagerDB");
+    const collection = db.collection("tasks");
+
+    try {
+        const result = await collection.insertOne(task);
+        return result;
+    } catch (error) {
+        console.error(error);
+        throw new Error("An error occurred while adding a task");
+    }
+}
+
+app.post("/api/tasks", async (req, res) => {
+    try {
+        const result = await addTask(req.body);
+        res.status(200).send(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("An error occurred while adding a task");
     }
 });
 
