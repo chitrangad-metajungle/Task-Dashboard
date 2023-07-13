@@ -214,7 +214,7 @@ const TaskList = () => {
           />
 
           <select onChange={(e) => setSelectedUser(e.target.value)}>
-            <option value="all">All Users</option>
+            <option value="">All Users</option>
             {users.map((user) => {
               return <option value={user}>{user}</option>;
             })}
@@ -249,6 +249,7 @@ const TaskList = () => {
             ) {
               return (
                 <TaskItem
+                  users={users}
                   key={task.id}
                   task={task}
                   onDragStart={(e) => handleDragStart(e, task)}
