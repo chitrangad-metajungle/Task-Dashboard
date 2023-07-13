@@ -213,33 +213,12 @@ const TaskList = () => {
             placeholder="Search tasks by project..."
           />
 
-          <div className="user-buttons">
-            <button
-              style={{ marginLeft: "10px" }}
-              className={selectedUser === "User1" ? "active" : ""}
-              onClick={() => setSelectedUser("User1")}
-            >
-              User 1
-            </button>
-            <button
-              className={selectedUser === "User2" ? "active" : ""}
-              onClick={() => setSelectedUser("User2")}
-            >
-              User 2
-            </button>
-            <button
-              className={selectedUser === "User3" ? "active" : ""}
-              onClick={() => setSelectedUser("User3")}
-            >
-              User 3
-            </button>
-            <button
-              className={selectedUser === "" ? "active" : ""}
-              onClick={() => setSelectedUser("")}
-            >
-              All
-            </button>
-          </div>
+          <select onChange={(e) => setSelectedUser(e.target.value)}>
+            <option value="all">All Users</option>
+            {users.map((user) => {
+              return <option value={user}>{user}</option>;
+            })}
+          </select>
         </div>
       </div>
       <div className="kanban-board">
