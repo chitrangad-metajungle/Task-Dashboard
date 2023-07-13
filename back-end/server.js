@@ -61,7 +61,7 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Get all tasks
+// Get all tasks from the database
 async function getAllTasks() {
   const db = client.db("TaskManagerDB");
   const collection = db.collection("tasks");
@@ -85,7 +85,7 @@ app.get("/api/tasks", async (req, res) => {
   }
 });
 
-//Add new task
+//Add new task to database
 async function addTask(task) {
   const db = client.db("TaskManagerDB");
   const collection = db.collection("tasks");
@@ -109,7 +109,7 @@ app.post("/api/tasks", async (req, res) => {
   }
 });
 
-//Delete task
+//Delete task from database
 async function deleteTask(taskId) {
   const db = client.db("TaskManagerDB");
   const collection = db.collection("tasks");
@@ -128,6 +128,33 @@ app.delete("/api/tasks/:taskId", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while deleting a task");
+  }
+});
+
+//Update task in database
+async function updateTask(taskId, updateobject) {
+  const db = client.db("TaskManagerDB");
+  const collection = db.collection("tasks");
+  const updateQuery = { $set: {} };
+
+  for (const [key, value] of Object.entries(updateobject)) {
+    updateQuery.$set[key] = value;
+  }
+
+  try {
+    const result = await collection.updateOne({ id: taskId }, updateQuery);
+  } catch (error) {
+    throw new Error("An error occurred while updating a task");
+  }
+}
+
+app.put("/api/tasks/:taskId", async (req, res) => {
+  taskId = req.params.taskId;
+  try {
+    const result = await updateTask(taskId, req.body);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send("An error occurred while updating a task");
   }
 });
 
