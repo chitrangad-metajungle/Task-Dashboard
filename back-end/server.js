@@ -137,9 +137,13 @@ async function updateTask(taskId, updateobject) {
   const collection = db.collection("tasks");
   const updateQuery = { $set: {} };
 
+  const allowedUpdates = ["assignedTo", "priority", "completionDate", "status"];
+
   for (const [key, value] of Object.entries(updateobject)) {
-    updateQuery.$set[key] = value;
+    if (allowedUpdates.includes(key)) updateQuery.$set[key] = value;
   }
+
+  //console.log(updateQuery);
 
   try {
     const result = await collection.updateOne({ id: taskId }, updateQuery);

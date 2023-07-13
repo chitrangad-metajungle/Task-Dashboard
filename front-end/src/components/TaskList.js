@@ -43,6 +43,19 @@ const TaskList = () => {
     }
   };
 
+  async function updateTaskDatabase(updatedTask) {
+    console.log(updatedTask);
+    try {
+      const result = await axios.put(
+        `http://localhost:8000/api/tasks/${updatedTask.id}`,
+        updatedTask
+      );
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error updating task front");
+    }
+  }
+
   const updateTask = (updatedTask) => {
     const updatedTasks = tasks.map((t) => {
       if (t.id === updatedTask.id) {
@@ -52,7 +65,8 @@ const TaskList = () => {
     });
 
     setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    //localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    updateTaskDatabase(updatedTask);
   };
 
   // Fetch tasks from database
@@ -150,7 +164,9 @@ const TaskList = () => {
     const task = JSON.parse(e.dataTransfer.getData("text/plain"));
     const updatedTasks = tasks.map((t) => {
       if (t.id === task.id) {
-        return { ...t, status };
+        t.status = status; // update status
+        updateTaskDatabase(t); // update in the database
+        return t;
       }
       return t;
     });
