@@ -29,10 +29,18 @@ const TaskList = () => {
     setSearchQueryProject(e.target.value);
   };
 
-  const deleteTask = (taskId) => {
+  const deleteTask = async (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(updatedTasks);
-    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    //localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    try {
+      const result = await axios.delete(
+        `http://localhost:8000/api/tasks/${taskId}`
+      );
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error deleting task");
+    }
   };
 
   const updateTask = (updatedTask) => {
@@ -47,13 +55,12 @@ const TaskList = () => {
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
 
+  // Fetch tasks from database
   useEffect(() => {
-    // const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
     const fetchData = async () => {
       try {
         const storedTasks = await axios.get("http://localhost:8000/api/tasks");
         setTasks(storedTasks.data);
-        //console.log("1");
       } catch (error) {
         console.log(error);
       }
@@ -71,7 +78,7 @@ const TaskList = () => {
       verification: [],
       completed: [],
     };
-    console.log(tasks);
+
     tasks.forEach((task) => {
       if (task.status === "todo") {
         categorizedTasks.todo.push(task);

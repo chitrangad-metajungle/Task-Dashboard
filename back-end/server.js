@@ -26,6 +26,8 @@ app.use(cors()); // Enable CORS for all origins
 
 const port = 8000;
 
+//APIs
+
 // Verify password
 async function verifyPassword(username, password) {
   const db = client.db("TaskManagerDB");
@@ -104,6 +106,28 @@ app.post("/api/tasks", async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while adding a task");
+  }
+});
+
+//Delete task
+async function deleteTask(taskId) {
+  const db = client.db("TaskManagerDB");
+  const collection = db.collection("tasks");
+  try {
+    const result = await collection.deleteOne({ id: taskId });
+  } catch (error) {
+    throw new Error("An error occurred while deleting a task");
+  }
+}
+
+app.delete("/api/tasks/:taskId", async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
+    const result = await deleteTask(taskId);
+    res.status(200).send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while deleting a task");
   }
 });
 
