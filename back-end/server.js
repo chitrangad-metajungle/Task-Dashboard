@@ -63,8 +63,25 @@ app.post("/api/login", async (req, res) => {
 async function getAllTasks() {
   const db = client.db("TaskManagerDB");
   const collection = db.collection("tasks");
-  //to do
+
+  try {
+    const result = await collection.find({}).toArray();
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw new Error("An error occurred while retrieving tasks");
+  }
 }
+
+app.get("/api/tasks", async (req, res) => {
+  try {
+    const result = await getAllTasks();
+    res.status(200).send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred while retrieving tasks");
+  }
+});
 
 //Add new task
 async function addTask(task) {

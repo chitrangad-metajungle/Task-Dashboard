@@ -31,7 +31,7 @@ const TaskForm = ({ addTask }) => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
 
     let assignedTo = "";
     let status = "todo";
