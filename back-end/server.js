@@ -9,9 +9,12 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
+let db;
+
 async function connectToMongoDB() {
   try {
     await client.connect();
+    db = client.db("TaskManagerDB");
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
@@ -30,7 +33,6 @@ const port = 8000;
 
 // Verify password
 async function verifyPassword(username, password) {
-  const db = client.db("TaskManagerDB");
   const collection = db.collection("users");
 
   try {
@@ -63,7 +65,6 @@ app.post("/api/login", async (req, res) => {
 
 // Get all tasks from the database
 async function getAllTasks() {
-  const db = client.db("TaskManagerDB");
   const collection = db.collection("tasks");
 
   try {
@@ -87,7 +88,6 @@ app.get("/api/tasks", async (req, res) => {
 
 //Add new task to database
 async function addTask(task) {
-  const db = client.db("TaskManagerDB");
   const collection = db.collection("tasks");
 
   try {
@@ -111,10 +111,10 @@ app.post("/api/tasks", async (req, res) => {
 
 //Delete task from database
 async function deleteTask(taskId) {
-  const db = client.db("TaskManagerDB");
   const collection = db.collection("tasks");
   try {
     const result = await collection.deleteOne({ id: taskId });
+    return result;
   } catch (error) {
     throw new Error("An error occurred while deleting a task");
   }
@@ -133,7 +133,6 @@ app.delete("/api/tasks/:taskId", async (req, res) => {
 
 //Update task in database
 async function updateTask(taskId, updateobject) {
-  const db = client.db("TaskManagerDB");
   const collection = db.collection("tasks");
   const updateQuery = { $set: {} };
 
@@ -143,10 +142,9 @@ async function updateTask(taskId, updateobject) {
     if (allowedUpdates.includes(key)) updateQuery.$set[key] = value;
   }
 
-  //console.log(updateQuery);
-
   try {
     const result = await collection.updateOne({ id: taskId }, updateQuery);
+    return result;
   } catch (error) {
     throw new Error("An error occurred while updating a task");
   }

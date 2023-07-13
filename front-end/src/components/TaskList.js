@@ -44,7 +44,6 @@ const TaskList = () => {
   };
 
   async function updateTaskDatabase(updatedTask) {
-    console.log(updatedTask);
     try {
       const result = await axios.put(
         `http://localhost:8000/api/tasks/${updatedTask.id}`,
