@@ -160,6 +160,30 @@ app.put("/api/tasks/:taskId", async (req, res) => {
   }
 });
 
+//Check all users exists
+async function checkAllUsers() {
+  const collection = db.collection("users");
+  try {
+    const result = await collection.find({}).toArray();
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw new Error("An error occurred while retrieving users");
+  }
+}
+
+app.get("/api/users", async (req, res) => {
+  try {
+    const result = await checkAllUsers();
+    const usernames = result.map((user) => user.username);
+    res.status(200).send(usernames);
+    console.log(usernames);
+  } catch (error) {
+    res.status(500).send("An error occurred while retrieving users");
+    throw new Error("An error occurred while retrieving users");
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

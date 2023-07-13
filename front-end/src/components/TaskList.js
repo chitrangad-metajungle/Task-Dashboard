@@ -21,6 +21,7 @@ const TaskList = () => {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [searchQueryProject, setSearchQueryProject] = useState("");
+  const [users, setUsers] = useState([]);
 
   const handleSearchInputChange = (e) => {
     setSearchQuery(e.target.value);
@@ -185,6 +186,14 @@ const TaskList = () => {
     setTasks(updatedTasks);
     localStorage.setItem("tasks", JSON.stringify(updatedTasks));
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      const allUsers = await axios.get("http://localhost:8000/api/users");
+      setUsers(allUsers.data);
+    }
+    fetchData();
+  }, []);
 
   return (
     <div>
