@@ -20,8 +20,7 @@ export default function Login(params) {
 
   const handleOtpChange = (event) => {
     const inputOtp = event.target.value;
-    console.log(inputOtp);
-    console.log(inputOtp.length);
+
     if (/^\d{0,6}$/.test(inputOtp) && inputOtp.length==6) {
       setError('');
     } else {
@@ -38,7 +37,7 @@ export default function Login(params) {
         email,
         otp
     });
-    console.log(generateOtp_response);
+
     if (generateOtp_response.status == 200) {
         setError("");
         setCookie("token", generateOtp_response.data.token, 1);
