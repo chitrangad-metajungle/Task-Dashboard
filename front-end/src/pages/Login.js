@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../styles/styles.css"
+import {setCookie} from "../Utility/token_functions"
 
 export default function Login(params) {
   const [username, setUsername] = useState("");
@@ -40,6 +41,7 @@ export default function Login(params) {
     console.log(generateOtp_response);
     if (generateOtp_response.status == 200) {
         setError("");
+        setCookie("token", generateOtp_response.data.token, 1);
         window.location.href = "/";
     } else {
       setError("OTP Not Valid!");
