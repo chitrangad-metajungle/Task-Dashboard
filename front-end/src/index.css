@@ -1,8 +1,9 @@
-body {
-  font-family: sans-serif;
-  margin-left: 0.5rem;
-  padding: 0;
-  background-color: whitesmoke;
+#root{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 h1, h2, h3, h4 {
