@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../styles/styles.css"
-import {setCookie} from "../Utility/token_functions"
+import {setCookie, getCookieValue} from "../Utility/token_functions"
 
 export default function Login(params) {
   const [username, setUsername] = useState("");
@@ -12,6 +12,7 @@ export default function Login(params) {
   const [showLogin, setShowLogin] = useState(true);
 
   const [otp, setOtp] = useState('');
+  const [enableOtpButton, setEnableOtpButton] = useState(false);
   const [error, setError] = useState('');
 
   const loginUrl = "http://127.0.0.1:10000/auth/login";
@@ -23,6 +24,7 @@ export default function Login(params) {
 
     if (/^\d{0,6}$/.test(inputOtp) && inputOtp.length==6) {
       setError('');
+      setEnableOtpButton(true);
     } else {
       setError('Please enter a 6-digit number.');
     }
@@ -33,53 +35,78 @@ export default function Login(params) {
     event.preventDefault();
 
     // Call API or perform other actions as needed
-    const generateOtp_response = await axios.post(validateOtp, {
+    axios.post(validateOtp, {
         email,
         otp
-    });
-
-    if (generateOtp_response.status == 200) {
+    }).then(generateOtp_response => {
+      if (generateOtp_response.status == 200) {
         setError("");
         setCookie("token", generateOtp_response.data.token, 1);
         window.location.href = "/";
-    } else {
-      setError("OTP Not Valid!");
-    }
+      } else {
+        setError("OTP Not Valid!");
+      }
+    }).catch(error => {
+      if(error.response.status == 404)
+        setError("Invalid username or password.");
+      else if(error.response.status == 401)
+        setError("Invalid OTP!");
+      else
+        setError("An error occurred during login: "+ error + ". Please Try Again!");
+    });
+
+    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const login_response = await axios.post(loginUrl, {
-        username,
-        password,
-      });
-
+    axios.post(loginUrl, {
+      username,
+      password,
+    }).then(login_response => {
       if (login_response.status == 200) {
         const email_holder = login_response.data.user.email
-        const generateOtp_response = await axios.post(generateOtp, {
-          "email" : email_holder,
-        });
 
-        if (generateOtp_response.status == 200) {
-          setUser(login_response.data.user);
-          setEmail(login_response.data.user.email);
-          setShowLogin(false);
-          setError("");
-        } else {
-          setError("Failure to generate OTP! Please Try Again!");
-        }
+        axios.post(generateOtp, {
+          "email" : email_holder,
+        }).then(generateOtp_response => {
+          if (generateOtp_response.status == 200) {
+            setUser(login_response.data.user);
+            setEmail(login_response.data.user.email);
+            setShowLogin(false);
+            setError("");
+          } else {
+            setError("Failure to generate OTP! Please Try Again!");
+          }
+        }).catch(error => {
+          if(error.response.status == 404)
+            setError("Invalid username or password.");
+          else if(error.response.status == 500)
+            setError("Failed to send OTP. Please Try Again!");
+          else
+            setError("An error occurred during login: "+ error + ". Please Try Again!");
+        });
 
       } else {
         setError("Invalid username or password.");
       }
-    } catch (error) {
-      setError("An error occurred during login: "+ error + ". Please Try Again!");
-    }
+    }).catch(error => {
+      if(error.response.status == 401)
+        setError("Invalid username or password.");
+      else
+        setError("An error occurred during login: "+ error + ". Please Try Again!");
+    });
   };
 
+  // console.log(getCookieValue('token'))
+  if(getCookieValue('token')!=null && getCookieValue('token')!=undefined)
+  {
+    window.location.href = "/";
+  }
+
   return (
+    
     <div>
       {showLogin ? 
         <div className="container">
@@ -89,8 +116,8 @@ export default function Login(params) {
                   <p className="ss">Please Enter your Password!</p>
                   <input type="text" name="" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
                   <input type="password" name ="" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                  <a className="forgot ss" href="#">Forgot password?</a>
                   {error && <div style={{ color: 'red' }}>{error}</div>}
+                  <a className="forgot ss" href="#">Forgot password?</a>
                   <input type="submit" className="button" value="Login" href="#"></input>
                   <a className="forgot text-info" to="/register" href="#">Register</a>
               </form>
@@ -104,7 +131,7 @@ export default function Login(params) {
                   <p className="ss">OTP has been sent to your Email!</p>
                   <input type="text" value={otp} onChange={handleOtpChange} />
                   {error && <div style={{ color: 'red' }}>{error}</div>}
-                  <button type="submit">Verify OTP</button>
+                  <button type="submit" disabled={!enableOtpButton}>Verify OTP</button>
               </form>
           </div>
         </div>

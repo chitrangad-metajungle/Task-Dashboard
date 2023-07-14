@@ -1,4 +1,4 @@
-const getCookieValue = (name) => {
+export const getCookieValue = (name) => {
   const cookies = document.cookie.split(';');
 
   for (let i = 0; i < cookies.length; i++) {
