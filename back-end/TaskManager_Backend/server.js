@@ -16,6 +16,7 @@ const { connectToMongoDB } = require("./src/config/database");
 const app = express();
 app.use(express.json()); // for parsing application/json
 app.use(cors()); // Enable CORS
+app.use(authenticateToken); // Enable CORS
 
 const port = 8000;
 
