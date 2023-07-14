@@ -3,6 +3,7 @@ import axios from "axios";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../styles/styles.css"
 import {setCookie, getCookieValue} from "../Utility/token_functions"
+import Loading from "../components/Loading";
 
 export default function Login(params) {
   const [username, setUsername] = useState("");
@@ -10,6 +11,8 @@ export default function Login(params) {
   const [user, setUser] = useState({});
   const [email, setEmail] = useState("");
   const [showLogin, setShowLogin] = useState(true);
+
+  const [loading, setLoading] = useState(false);
 
   const [otp, setOtp] = useState('');
   const [enableOtpButton, setEnableOtpButton] = useState(false);
@@ -35,6 +38,7 @@ export default function Login(params) {
     event.preventDefault();
 
     // Call API or perform other actions as needed
+    setLoading(true)
     axios.post(validateOtp, {
         email,
         otp
@@ -46,6 +50,8 @@ export default function Login(params) {
       } else {
         setError("OTP Not Valid!");
       }
+
+      setLoading(false)
     }).catch(error => {
       if(error.response.status == 404)
         setError("Invalid username or password.");
@@ -53,14 +59,16 @@ export default function Login(params) {
         setError("Invalid OTP!");
       else
         setError("An error occurred during login: "+ error + ". Please Try Again!");
+
+      setLoading(false)
     });
 
-    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true)
     axios.post(loginUrl, {
       username,
       password,
@@ -71,6 +79,7 @@ export default function Login(params) {
         axios.post(generateOtp, {
           "email" : email_holder,
         }).then(generateOtp_response => {
+        
           if (generateOtp_response.status == 200) {
             setUser(login_response.data.user);
             setEmail(login_response.data.user.email);
@@ -79,6 +88,8 @@ export default function Login(params) {
           } else {
             setError("Failure to generate OTP! Please Try Again!");
           }
+
+          setLoading(false)
         }).catch(error => {
           if(error.response.status == 404)
             setError("Invalid username or password.");
@@ -86,28 +97,35 @@ export default function Login(params) {
             setError("Failed to send OTP. Please Try Again!");
           else
             setError("An error occurred during login: "+ error + ". Please Try Again!");
+          
+          setLoading(false)
         });
 
       } else {
         setError("Invalid username or password.");
+        setLoading(false)
       }
+
     }).catch(error => {
       if(error.response.status == 401)
         setError("Invalid username or password.");
       else
         setError("An error occurred during login: "+ error + ". Please Try Again!");
+      
+      setLoading(false)
     });
   };
 
   // console.log(getCookieValue('token'))
-  if(getCookieValue('token')!=null && getCookieValue('token')!=undefined)
-  {
-    window.location.href = "/";
-  }
+  // if(getCookieValue('token')!=null && getCookieValue('token')!=undefined)
+  // {
+  //   window.location.href = "/";
+  // }
 
   return (
     
     <div>
+      {loading && <Loading />}
       {showLogin ? 
         <div className="container">
             <div className="card">
