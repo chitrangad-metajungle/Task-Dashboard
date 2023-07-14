@@ -12,13 +12,15 @@ const {
   updateTask,
 } = require("./controllers/taskController");
 const { connectToMongoDB } = require("./src/config/database");
+require("dotenv").config();
+const authenticateToken = require('./middlewares/authenticateToken');
 
 const app = express();
 app.use(express.json()); // for parsing application/json
 app.use(cors()); // Enable CORS
 app.use(authenticateToken); // Enable CORS
 
-const port = 8000;
+const port = process.env.PORT;
 
 let db;
 
