@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import axios from "axios";
+import {setAxiosHeaders} from "../Utility/token_functions"
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -73,6 +74,7 @@ const TaskList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setAxiosHeaders(axios)
         const storedTasks = await axios.get("http://localhost:8000/api/tasks");
         setTasks(storedTasks.data);
       } catch (error) {
@@ -189,6 +191,7 @@ const TaskList = () => {
 
   useEffect(() => {
     async function fetchData() {
+      setAxiosHeaders(axios);
       const allUsers = await axios.get("http://localhost:8000/api/users");
       setUsers(allUsers.data);
     }
