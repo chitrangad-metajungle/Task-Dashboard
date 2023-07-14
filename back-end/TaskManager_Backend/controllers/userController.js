@@ -1,11 +1,8 @@
-const { connectToMongoDB } = require("../src/config/database.js");
+const userModel = require("../models/userModel");
 
 async function verifyPassword(username, password) {
-  const db = await connectToMongoDB();
-  const collection = db.collection("users");
-
   try {
-    const user = await collection.findOne({ username: username });
+    const user = await userModel.findOne({ username: username });
 
     if (!user) {
       return { success: false, message: "User not found" };
@@ -23,10 +20,8 @@ async function verifyPassword(username, password) {
 }
 
 async function checkAllUsers() {
-  const db = await connectToMongoDB();
-  const collection = db.collection("users");
   try {
-    const result = await collection.find({}).toArray();
+    const result = await userModel.find({});
     return result;
   } catch (error) {
     console.error(error);

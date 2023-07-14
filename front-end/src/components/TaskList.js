@@ -55,7 +55,7 @@ const TaskList = () => {
       );
     } catch (error) {
       console.error(error);
-      throw new Error("Error updating task front");
+      //throw new Error("Error updating task front");
     }
   }
 
@@ -261,9 +261,7 @@ const TaskList = () => {
                   deleteTask={deleteTask}
                   updateTask={updateTask}
                   moveTaskToInProgress={moveTaskToInProgress}
-                >
-                  {console.log(users)}
-                </TaskItem>
+                ></TaskItem>
               );
             }
             return null;

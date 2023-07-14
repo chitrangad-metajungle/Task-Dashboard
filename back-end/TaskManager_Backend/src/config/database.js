@@ -1,23 +1,18 @@
-const { MongoClient } = require("mongodb");
+const mongoose = require("mongoose");
 
 const uri =
-  "mongodb+srv://MetaAdmin:ql4R9W00MYgsZ3qy@taskmanager.x5nspqq.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-let db;
+  "mongodb+srv://MetaAdmin:ql4R9W00MYgsZ3qy@taskmanager.x5nspqq.mongodb.net/TaskManagerDB?retryWrites=true&w=majority";
 
 async function connectToMongoDB() {
   try {
-    await client.connect();
-    db = client.db("TaskManagerDB");
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
     console.log("Connected to MongoDB");
-    return db; // Export the connected db
   } catch (error) {
     console.error("Error connecting to MongoDB:", error);
-    throw error; // If connection fails, throw the error
+    throw error;
   }
 }
 

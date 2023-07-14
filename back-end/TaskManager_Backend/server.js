@@ -1,4 +1,3 @@
-// server.js
 const express = require("express");
 const cors = require("cors");
 const {
@@ -22,11 +21,8 @@ app.use(cors()); // Enable CORS
 
 const port = process.env.PORT;
 
-let db;
-
 async function startServer() {
   await connectToMongoDB();
-
   app.post("/api/login", async (req, res) => {
     try {
       const result = await verifyPassword(req.body.username, req.body.password);
@@ -73,7 +69,7 @@ async function startServer() {
       res.status(200).send(result);
     } catch (error) {
       console.error(error);
-      res.status(500).send("An error occurred while updating a task");
+      res.status(600).send("An error occurred while updating a task");
     }
   });
 
@@ -93,4 +89,4 @@ async function startServer() {
   });
 }
 
-startServer().catch(console.error);
+startServer();

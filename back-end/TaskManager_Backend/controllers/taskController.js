@@ -1,11 +1,8 @@
-const { connectToMongoDB } = require("../src/config/database.js");
+const taskModel = require("../models/taskModel");
 
 async function getAllTasks() {
-  const db = await connectToMongoDB();
-  const collection = db.collection("tasks");
-
   try {
-    const result = await collection.find({}).toArray();
+    const result = await taskModel.find({});
     return result;
   } catch (error) {
     console.error(error);
@@ -14,11 +11,9 @@ async function getAllTasks() {
 }
 
 async function addTask(task) {
-  const db = await connectToMongoDB();
-  const collection = db.collection("tasks");
-
   try {
-    const result = await collection.insertOne(task);
+    const newTask = new taskModel(task);
+    const result = await newTask.save();
     return result;
   } catch (error) {
     console.error(error);
@@ -27,10 +22,8 @@ async function addTask(task) {
 }
 
 async function deleteTask(taskId) {
-  const db = await connectToMongoDB();
-  const collection = db.collection("tasks");
   try {
-    const result = await collection.deleteOne({ id: taskId });
+    const result = await taskModel.deleteOne({ _id: taskId });
     return result;
   } catch (error) {
     throw new Error("An error occurred while deleting a task");
@@ -38,18 +31,13 @@ async function deleteTask(taskId) {
 }
 
 async function updateTask(taskId, updateobject) {
-  const db = await connectToMongoDB();
-  const collection = db.collection("tasks");
-  const updateQuery = { $set: {} };
-
-  const allowedUpdates = ["assignedTo", "priority", "completionDate", "status"];
-
-  for (const [key, value] of Object.entries(updateobject)) {
-    if (allowedUpdates.includes(key)) updateQuery.$set[key] = value;
-  }
+  const updates = ["assignedTo", "status"];
 
   try {
-    const result = await collection.updateOne({ id: taskId }, updateQuery);
+    const result = await taskModel.updateOne(
+      { title: taskId },
+      { $set: updateobject }
+    );
     return result;
   } catch (error) {
     throw new Error("An error occurred while updating a task");
