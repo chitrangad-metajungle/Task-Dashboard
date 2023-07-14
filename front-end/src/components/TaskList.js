@@ -36,6 +36,7 @@ const TaskList = () => {
     setTasks(updatedTasks);
     //localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     try {
+      setAxiosHeaders(axios)
       const result = await axios.delete(
         `http://localhost:8000/api/tasks/${taskId}`
       );
@@ -47,6 +48,7 @@ const TaskList = () => {
 
   async function updateTaskDatabase(updatedTask) {
     try {
+      setAxiosHeaders(axios)
       const result = await axios.put(
         `http://localhost:8000/api/tasks/${updatedTask.id}`,
         updatedTask
