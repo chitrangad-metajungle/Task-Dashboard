@@ -6,8 +6,8 @@ import "../styles/styles.css"
 export default function Login(params) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [FAuth, setAuth] = useState(false);
   const [user, setUser] = useState({});
+  const [email, setEmail] = useState("");
   const [showLogin, setShowLogin] = useState(true);
 
   const [otp, setOtp] = useState('');
@@ -19,34 +19,30 @@ export default function Login(params) {
 
   const handleOtpChange = (event) => {
     const inputOtp = event.target.value;
-    if (/^\d{0,6}$/.test(inputOtp)) {
-      setOtp(inputOtp);
+    console.log(inputOtp);
+    console.log(inputOtp.length);
+    if (/^\d{0,6}$/.test(inputOtp) && inputOtp.length==6) {
       setError('');
     } else {
       setError('Please enter a 6-digit number.');
     }
+    setOtp(inputOtp);
   };
 
   const handleSubmitOtp = async (event) => {
     event.preventDefault();
 
-    if (otp.length === 6) {
-        // Perform OTP verification logic
-        console.log('Verifying OTP:', otp);
-        // Call API or perform other actions as needed
-        const generateOtp_response = await axios.post(validateOtp, {
-            username,
-            password,
-            otp
-        });
-        if (generateOtp_response.status == 200) {
-            window.location.href = "/";
-        } else {
-            alert("Failure to generate OTP!");
-        }
-
+    // Call API or perform other actions as needed
+    const generateOtp_response = await axios.post(validateOtp, {
+        email,
+        otp
+    });
+    console.log(generateOtp_response);
+    if (generateOtp_response.status == 200) {
+        setError("");
+        window.location.href = "/";
     } else {
-        alert("Failure to generate OTP!");
+      setError("OTP Not Valid!");
     }
   };
 
@@ -58,25 +54,27 @@ export default function Login(params) {
         username,
         password,
       });
-      console.log(login_response);
 
       if (login_response.status == 200) {
-        setAuth(true);
+        const email_holder = login_response.data.user.email
         const generateOtp_response = await axios.post(generateOtp, {
-          username,
-          password,
+          "email" : email_holder,
         });
+
         if (generateOtp_response.status == 200) {
-          setUser(user);
+          setUser(login_response.data.user);
+          setEmail(login_response.data.user.email);
           setShowLogin(false);
+          setError("");
         } else {
-          alert("Failure to generate OTP!");
+          setError("Failure to generate OTP! Please Try Again!");
         }
+
       } else {
-        alert("Invalid username or password.");
+        setError("Invalid username or password.");
       }
     } catch (error) {
-      console.error("An error occurred during login:", error);
+      setError("An error occurred during login: "+ error + ". Please Try Again!");
     }
   };
 
@@ -91,6 +89,7 @@ export default function Login(params) {
                   <input type="text" name="" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
                   <input type="password" name ="" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
                   <a className="forgot ss" href="#">Forgot password?</a>
+                  {error && <div style={{ color: 'red' }}>{error}</div>}
                   <input type="submit" className="button" value="Login" href="#"></input>
                   <a className="forgot text-info" to="/register" href="#">Register</a>
               </form>
