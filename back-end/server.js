@@ -177,7 +177,6 @@ app.get("/api/users", async (req, res) => {
     const result = await checkAllUsers();
     const usernames = result.map((user) => user.username);
     res.status(200).send(usernames);
-    console.log(usernames);
   } catch (error) {
     res.status(500).send("An error occurred while retrieving users");
     throw new Error("An error occurred while retrieving users");

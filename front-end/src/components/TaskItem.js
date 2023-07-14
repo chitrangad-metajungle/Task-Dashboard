@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/modal.css";
 
-const TaskItem = ({ users, task, deleteTask, updateTask }) => {
+const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState("");
   const [assignedTo, setAssignedTo] = useState(task.assignedTo);
+  const [users, setUsers] = useState(usersArr);
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData("text/plain", JSON.stringify(task));
@@ -67,7 +68,14 @@ const TaskItem = ({ users, task, deleteTask, updateTask }) => {
         </button>
       </div>
       {showModal && (
-        <div className="modal">
+        <div
+          style={{
+            // backgroundColor: "red",
+            top: 0,
+            width: "10vw",
+            // height: "50vh",
+          }}
+        >
           <form onSubmit={handleModalSubmit}>
             <label htmlFor="assignedTo">Assigned To:</label>
             <select
@@ -78,11 +86,7 @@ const TaskItem = ({ users, task, deleteTask, updateTask }) => {
             >
               <option value="">Assign To:</option>
               {users.map((user) => {
-                return (
-                  <option key={user} value={user}>
-                    {user}
-                  </option>
-                );
+                return <option value={user}>{user}</option>;
               })}
             </select>
             <button type="submit">Assign Task</button>

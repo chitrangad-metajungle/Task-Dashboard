@@ -249,14 +249,16 @@ const TaskList = () => {
             ) {
               return (
                 <TaskItem
-                  users={users}
+                  usersArr={users}
                   key={task.id}
                   task={task}
                   onDragStart={(e) => handleDragStart(e, task)}
                   deleteTask={deleteTask}
                   updateTask={updateTask}
                   moveTaskToInProgress={moveTaskToInProgress}
-                />
+                >
+                  {console.log(users)}
+                </TaskItem>
               );
             }
             return null;
@@ -289,6 +291,7 @@ const TaskList = () => {
             ) {
               return (
                 <TaskItem
+                  usersArr={users}
                   key={task.id}
                   task={task}
                   onDragStart={(e) => handleDragStart(e, task)}
@@ -327,6 +330,7 @@ const TaskList = () => {
             ) {
               return (
                 <TaskItem
+                  usersArr={users}
                   key={task.id}
                   task={task}
                   onDragStart={(e) => handleDragStart(e, task)}
@@ -365,6 +369,7 @@ const TaskList = () => {
             ) {
               return (
                 <TaskItem
+                  usersArr={users}
                   key={task.id}
                   task={task}
                   onDragStart={(e) => handleDragStart(e, task)}
@@ -403,6 +408,7 @@ const TaskList = () => {
             ) {
               return (
                 <TaskItem
+                  usersArr={users}
                   key={task.id}
                   task={task}
                   onDragStart={(e) => handleDragStart(e, task)}
