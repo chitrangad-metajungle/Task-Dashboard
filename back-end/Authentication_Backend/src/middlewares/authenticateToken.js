@@ -5,14 +5,15 @@ function authenticateToken(req, res, next) {
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
-    return res.status(401).json({ message: 'Authentication failed' });
+    return res.status(403).send("A token is required for authentication");
   }
 
-  jwt.verify(token, 'secret_key', (err, user) => {
+  const secret_key = process.env.SECRET_KEY
+  jwt.verify(token, secret_key, (err, res) => {
     if (err) {
       return res.status(403).json({ message: 'Invalid token' });
     }
-    req.user = user;
+    req.user = res.user;
     next();
   });
 }
