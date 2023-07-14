@@ -6,23 +6,31 @@ body {
     /* background: #a795b4; */
 }
 
-.card{
-    margin-bottom:20px;
-    border:none;
-}
-
-.box {
-    width: 500px;
-    padding: 40px;
-    position: absolute;
+.container{
+    position: static;
     top: 50%;
     left: 50%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card{
+    width: 400px; /* Specify the desired width */
+    height: 500px;
+    border:none;
     background: #575767;
-    ;
     text-align: center;
     transition: 0.25s;
-    margin-top: 100px
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
+
+
 
 .box input[type="text"],
 .box input[type="password"] {
@@ -48,6 +56,14 @@ body {
     font-weight: 500;
     font-family:Georgia, 'Times New Roman', Times, serif;
 }
+.box h2 {
+    color: white;
+    /* text-transform: uppercase; */
+    /* font-variant: small-caps; */
+    font-size: 28px;
+    font-weight: 500;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
 
 .box input[type="text"]:focus,
 .box input[type="password"]:focus {
@@ -62,7 +78,7 @@ body {
     margin: 20px auto;
     text-align: center;
     border: 2px solid #2ecc71;
-    padding: 14px;
+    padding: 3px;
     outline: none;
     color: rgb(254, 254, 254);
     border-radius: 24px;
