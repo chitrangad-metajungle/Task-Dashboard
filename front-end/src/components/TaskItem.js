@@ -71,9 +71,9 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
         <div
           style={{
             // backgroundColor: "red",
-            top: 0,
-            width: "10vw",
-            // height: "50vh",
+            position: "absolute",
+            top: "50%",
+            width: "50vw",
           }}
         >
           <form onSubmit={handleModalSubmit}>
