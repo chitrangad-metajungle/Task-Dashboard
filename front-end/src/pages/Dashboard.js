@@ -7,13 +7,13 @@ import {getCookieValue} from "../Utility/token_functions"
 const Dashboard = ({addTask, tasks}) => {
 
   // console.log(getCookieValue('token'))
-  if(getCookieValue('token')==null || getCookieValue('token')==undefined)
-  {
-    window.location.href = "/login";
-  }
+  // if(getCookieValue('token')==null || getCookieValue('token')==undefined)
+  // {
+  //   window.location.href = "/login";
+  // }
 
   return (
-    <div>
+    <div className='dashboard_container'>
       <div className='header'>
         <h1>Task Dashboard</h1>
       </div>

@@ -20,7 +20,7 @@ export const setCookie = (name, value, expirationDays) => {
 
 export const setAxiosHeaders = (axios) => {
 
-  const token = getCookieValue('token'); // Replace 'getCookie' with your cookie retrieval logic
+  const token = getCookieValue('token') || "test_token";
 
   if (token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;

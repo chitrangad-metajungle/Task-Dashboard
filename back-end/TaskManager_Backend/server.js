@@ -18,7 +18,7 @@ const authenticateToken = require('./middlewares/authenticateToken');
 const app = express();
 app.use(express.json()); // for parsing application/json
 app.use(cors()); // Enable CORS
-app.use(authenticateToken); // Enable CORS
+// app.use(authenticateToken);
 
 const port = process.env.PORT;
 
