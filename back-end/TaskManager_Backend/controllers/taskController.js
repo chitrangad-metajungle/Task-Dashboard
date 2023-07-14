@@ -23,7 +23,7 @@ async function addTask(task) {
 
 async function deleteTask(taskId) {
   try {
-    const result = await taskModel.deleteOne({ _id: taskId });
+    const result = await taskModel.deleteOne({ title: taskId });
     return result;
   } catch (error) {
     throw new Error("An error occurred while deleting a task");

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import "../styles/modal.css";
 
@@ -7,6 +8,10 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
   const [selectedUser, setSelectedUser] = useState("");
   const [assignedTo, setAssignedTo] = useState(task.assignedTo);
   const [users, setUsers] = useState(usersArr);
+
+  useEffect(() => {
+    setUsers(usersArr);
+  }, [usersArr]);
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData("text/plain", JSON.stringify(task));
@@ -86,7 +91,11 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
             >
               <option value="">Assign To:</option>
               {users.map((user) => {
-                return <option value={user}>{user}</option>;
+                return (
+                  <option value={user} key={user}>
+                    {user}
+                  </option>
+                );
               })}
             </select>
             <button type="submit">Assign Task</button>

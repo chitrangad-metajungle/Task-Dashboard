@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import axios from "axios";
-import {setAxiosHeaders} from "../Utility/token_functions"
+import { setAxiosHeaders } from "../Utility/token_functions";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -36,7 +36,7 @@ const TaskList = () => {
     setTasks(updatedTasks);
     //localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     try {
-      setAxiosHeaders(axios)
+      setAxiosHeaders(axios);
       const result = await axios.delete(
         `http://localhost:8000/api/tasks/${taskId}`
       );
@@ -48,7 +48,7 @@ const TaskList = () => {
 
   async function updateTaskDatabase(updatedTask) {
     try {
-      setAxiosHeaders(axios)
+      setAxiosHeaders(axios);
       const result = await axios.put(
         `http://localhost:8000/api/tasks/${updatedTask.id}`,
         updatedTask
@@ -76,7 +76,7 @@ const TaskList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setAxiosHeaders(axios)
+        setAxiosHeaders(axios);
         const storedTasks = await axios.get("http://localhost:8000/api/tasks");
         setTasks(storedTasks.data);
       } catch (error) {
@@ -200,6 +200,10 @@ const TaskList = () => {
     fetchData();
   }, []);
 
+  // if (users.length === 0) {
+  //   return <div>Loading...</div>;
+  // }
+
   return (
     <div>
       <div>
@@ -221,7 +225,11 @@ const TaskList = () => {
           <select onChange={(e) => setSelectedUser(e.target.value)}>
             <option value="">All Users</option>
             {users.map((user) => {
-              return <option value={user}>{user}</option>;
+              return (
+                <option value={user} key={user}>
+                  {user}
+                </option>
+              );
             })}
           </select>
         </div>
