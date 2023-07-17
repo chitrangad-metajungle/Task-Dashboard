@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
+import Header from '../components/Header';
 import '../styles/kanban.css'; 
+import "../styles/Dashboard.css"
 import {getCookieValue} from "../Utility/token_functions"
 
 const Dashboard = ({addTask, tasks}) => {
 
-  // console.log(getCookieValue('token'))
-  // if(getCookieValue('token')==null || getCookieValue('token')==undefined)
-  // {
-  //   window.location.href = "/login";
-  // }
+  useEffect(() => {
+    // if(getCookieValue('token')==null || getCookieValue('token')==undefined)
+    // {
+    //   window.location.href = "/login";
+    // }
+  }, []);
 
   return (
     <div className='dashboard_container'>
-      <div className='header'>
-        <h1>Task Dashboard</h1>
-      </div>
+      <Header></Header>
       <TaskForm addTask={addTask} />
       <TaskList  tasks={tasks} />
     </div>
