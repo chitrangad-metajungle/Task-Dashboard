@@ -76,7 +76,7 @@ exports.validateTwoFactorOTP = async (req, res) => {
     try {
       const secret_key = process.env.SECRET_KEY
       const token = jwt.sign({ user:user}, secret_key, { expiresIn: '1h' });
-      res.status(200).json({ token });
+      res.status(200).json({ token, user:user });
     } catch (error) {
       res.status(500).json({ error: 'JWT Token Generation failed: ' + error});
     }
