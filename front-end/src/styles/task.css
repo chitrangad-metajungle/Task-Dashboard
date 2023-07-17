@@ -5,7 +5,7 @@
     width: 100vw;
     height: 100vh;
     font-family: sans-serif;
-    background: #e4fdf1;
+    background: #f3fff9;
 }
 .main{
     display: flex;
@@ -45,7 +45,7 @@
 }
 .project{
     text-align: center;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
     color: #fd4040;
 }

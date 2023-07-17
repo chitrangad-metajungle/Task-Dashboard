@@ -75,7 +75,7 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
       </div>
 
       <br></br>
-      <p>
+      <p style={{fontSize: "12px", fontWeight:"bold"}}>
         <Link to={`/tasks/${task.title}`}>{task.title}</Link>
       </p>
       <br></br>
@@ -83,15 +83,15 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
         <strong>Project:{task.project}</strong>
       </p> */}
       <br></br>
-      <p>Assigned To:{assignedTo}</p>
+      <p style={{fontSize: "12px"}}>Assigned To:{assignedTo}</p>
       <br></br>
-      <p>Completion Date:{task.completionDate}</p>
+      <p style={{fontSize: "12px"}}>Completion Date:{task.completionDate}</p>
       <br></br>
       <div>
         {task.priority === "red" && (
           <span
             className="bar"
-            style={{ backgroundColor: "blue", width: "100%" }}
+            style={{ backgroundColor: "red", width: "100%" }}
           ></span>
         )}
         {task.priority === "yellow" && (

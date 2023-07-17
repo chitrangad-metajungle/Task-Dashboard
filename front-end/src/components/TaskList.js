@@ -250,7 +250,7 @@ const TaskList = () => {
               style={{
                 textDecoration: "underline",
                 color: "#097969",
-                fontSize: "14px",
+                fontSize: "10px",
               }}
             >
               {taskCounts.todo}
@@ -290,7 +290,7 @@ const TaskList = () => {
               style={{
                 textDecoration: "underline",
                 color: "#097969",
-                fontSize: "14px",
+                fontSize: "10px",
               }}
             >
               {taskCounts.inProcess}
@@ -329,7 +329,7 @@ const TaskList = () => {
               style={{
                 textDecoration: "underline",
                 color: "#097969",
-                fontSize: "14px",
+                fontSize: "10px",
               }}
             >
               {taskCounts.blockers}
@@ -368,7 +368,7 @@ const TaskList = () => {
               style={{
                 textDecoration: "underline",
                 color: "#097969",
-                fontSize: "14px",
+                fontSize: "10px",
               }}
             >
               {taskCounts.verification}
@@ -407,7 +407,7 @@ const TaskList = () => {
               style={{
                 textDecoration: "underline",
                 color: "#097969",
-                fontSize: "14px",
+                fontSize: "10px",
               }}
             >
               {taskCounts.completed}

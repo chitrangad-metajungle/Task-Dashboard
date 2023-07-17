@@ -4,9 +4,9 @@
   left: 0;
   width: 100%;
   min-height: 100vh;
-  font-family: 'poppins', sans-serif;
+  font-family: sans-serif;
   /* background: linear-gradient(to left, #18a27a, #60da9f); */
-  background: #e4fdf1;
+  background: #f3fff9;
 }
 
 h1, h2, h3, h4 {
