@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import TaskDetails from "./pages/TaskDetails";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +25,7 @@ const App = () => {
             element={<TaskDetails tasks={tasks} />}
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
     </Router>
