@@ -88,7 +88,6 @@ const TaskList = () => {
     };
 
     fetchData();
-    console.log(tasks);
   }, []);
 
   useEffect(() => {

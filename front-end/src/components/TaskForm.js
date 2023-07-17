@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {getCookieValue} from "../Utility/token_functions"
+import { getCookieValue } from "../Utility/token_functions";
+import axios from "axios";
 
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
@@ -11,22 +12,37 @@ const TaskForm = ({ addTask }) => {
   const [showNewProjectInput, setShowNewProjectInput] = useState(false);
 
   useEffect(() => {
-    const storedProjectList = localStorage.getItem("projectList");
-    if (storedProjectList) {
-      setProjectList(JSON.parse(storedProjectList));
-    }
-  }, []);
+    async function fetchProjectList() {
+      try {
+        const response = await axios.get("http://localhost:8000/api/projects", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-  useEffect(() => {
-    localStorage.setItem("projectList", JSON.stringify(projectList));
+        const tempList = response.data.map((i) => {
+          return i.project;
+        });
+
+        setProjectList(tempList);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    fetchProjectList();
   }, [projectList]);
 
-  const token = getCookieValue('token'); // Replace 'getCookie' with your cookie retrieval logic
+  // useEffect(() => {
+  //   localStorage.setItem("projectList", JSON.stringify(projectList));
+  // }, [projectList]);
+
+  const token = getCookieValue("token"); // Replace 'getCookie' with your cookie retrieval logic
   const addTaskToDatabase = async (newTask) => {
     const response = await fetch("http://localhost:8000/api/tasks", {
       method: "POST",
       headers: {
-        "Authorization":`Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newTask),
@@ -103,10 +119,29 @@ const TaskForm = ({ addTask }) => {
       );
 
       if (!existingProject && inputProject !== "") {
-        setProjectList([...projectList, inputProject]);
+        //setProjectList([...projectList, inputProject]);
+        async function addProject(inputProject) {
+          try {
+            const response = await axios.post(
+              "http://localhost:8000/api/projects",
+              {
+                project: inputProject,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+        addProject(inputProject);
+        setProject("");
+        setShowNewProjectInput(false);
       }
-      setProject("");
-      setShowNewProjectInput(false);
     }
   };
 

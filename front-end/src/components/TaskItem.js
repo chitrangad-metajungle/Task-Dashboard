@@ -15,6 +15,10 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
     setUsers(usersArr);
   }, [usersArr]);
 
+  useEffect(() => {
+    setAssignedTo(task.assignedTo);
+  }, [task.assignedTo]);
+
   const handleDragStart = (e) => {
     e.dataTransfer.setData("text/plain", JSON.stringify(task));
   };
