@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../styles/styles.css"
 import {setCookie, getCookieValue} from "../Utility/token_functions"
 import Loading from "../components/Loading";
+
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 export default function Login(params) {
   const [username, setUsername] = useState("");
@@ -116,43 +125,142 @@ export default function Login(params) {
     });
   };
 
-  // console.log(getCookieValue('token'))
-  // if(getCookieValue('token')!=null && getCookieValue('token')!=undefined)
-  // {
-  //   window.location.href = "/";
-  // }
+  useEffect(() => {
+    // console.log(getCookieValue('token'))
+    // if(getCookieValue('token')!=null && getCookieValue('token')!=undefined)
+    // {
+    //   window.location.href = "/";
+    // }
+  }, []);
 
   return (
     
     <div>
       {loading && <Loading />}
       {showLogin ? 
-        <div className="container">
-            <div className="card">
-              <form onSubmit={handleSubmit} className="box">
-                <h1>Login</h1>
-                  <p className="ss">Please Enter your Password!</p>
-                  <input type="text" name="" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)}></input>
-                  <input type="password" name ="" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-                  {error && <div style={{ color: 'red' }}>{error}</div>}
-                  <a className="forgot ss" href="#">Forgot password?</a>
-                  <input type="submit" className="button" value="Login" href="#"></input>
-                  <a className="forgot text-info" to="/register" href="#">Register</a>
-              </form>
-          </div>
-        </div>
+      <Container component="main" maxWidth="sm">
+      <Box
+        sx={{
+          boxShadow: 3,
+          borderRadius: 2,
+          px: 4,
+          py: 6,
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoComplete="username"
+            autoFocus
+            value={username} 
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password} 
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {error && <div style={{ color: 'red' }}>{error}</div>}
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
         :
-        <div className="container">
-          <div  className="card">
-              <form onSubmit={handleSubmitOtp} className="box">
-                  <h2>OTP Verification</h2>
-                  <p className="ss">OTP has been sent to your Email!</p>
-                  <input type="text" value={otp} onChange={handleOtpChange} />
-                  {error && <div style={{ color: 'red' }}>{error}</div>}
-                  <button type="submit" disabled={!enableOtpButton}>Verify OTP</button>
-              </form>
-          </div>
-        </div>
+        // <div className="container">
+        //   <div  className="card">
+        //       <form onSubmit={handleSubmitOtp} className="box">
+        //           <h2>OTP Verification</h2>
+        //           <p className="ss">OTP has been sent to your Email!</p>
+        //           <input type="text" value={otp} onChange={handleOtpChange} />
+        //           {error && <div style={{ color: 'red' }}>{error}</div>}
+        //           <button type="submit" disabled={!enableOtpButton}>Verify OTP</button>
+        //       </form>
+        //   </div>
+        // </div>
+        <Container component="main" maxWidth="sm">
+          <Box
+            sx={{
+              boxShadow: 3,
+              borderRadius: 2,
+              px: 4,
+              py: 6,
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <Typography component="h1" variant="h5">
+            OTP Verification
+            </Typography>
+            <Box component="form" onSubmit={handleSubmitOtp} noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="otp"
+                label="OTP"
+                name="otp"
+                autoComplete="otp"
+                autoFocus
+                value={otp} 
+                onChange={handleOtpChange}
+              />
+              {error && <div style={{ color: 'red' }}>{error}</div>}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                disabled={!enableOtpButton}
+              >
+                Sign In
+              </Button>
+            </Box>
+          </Box>
+        </Container>
       }
     </div>
   );
