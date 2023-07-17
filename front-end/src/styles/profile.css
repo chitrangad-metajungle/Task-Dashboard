@@ -5,15 +5,13 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: #e8e1e1;
+  background-color: #ffffff;
 }
 
-#closeButton {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin: 10px;
-  font-size: 15px;
-  color: #ffffff;
-  cursor: pointer;
+.profileItem {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  font-size: 20px;
+  margin: 20px;
 }
