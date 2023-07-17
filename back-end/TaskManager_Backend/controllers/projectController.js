@@ -12,7 +12,6 @@ async function getAllProjects() {
 
 async function addProject(project) {
   try {
-    console.log(project);
     const newProject = new projectModel(project);
     const result = await newProject.save();
     return result;
