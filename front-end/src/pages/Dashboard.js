@@ -10,15 +10,20 @@ import Profile from "../components/Profile";
 const sidebarWidth = 240;
 
 const Dashboard = ({ addTask, tasks }) => {
-  const [display, setDisplay] = useState("Dashboard");
+
+  const [display, setDisplay] = useState("TaskList");
   const [open, setOpen] = useState(false);
 
   const handleProfileClick = () => {
     setDisplay("Profile");
   };
 
-  const handleiDashboardClick = () => {
-    setDisplay("Dashboard");
+  const handleTaskFormClick = () => {
+    setDisplay("TaskForm");
+  };
+
+  const handleTaskListClick = () => {
+    setDisplay("TaskList");
   };
 
   useEffect(() => {
@@ -43,19 +48,23 @@ const Dashboard = ({ addTask, tasks }) => {
         open={open}
         handleSidebarOpen={handleSidebarOpen}
         profileClick={handleProfileClick}
-        handleiDashboardClick={handleiDashboardClick}
       ></Header>
       <div className="dashboard_container">
         <Sidebar
           sidebarWidth={sidebarWidth}
           open={open}
           handleSidebarClose={handleSidebarClose}
-          handleiDashboardClick={handleiDashboardClick}
+          handleTaskFormClick={handleTaskFormClick}
+          handleTaskListClick={handleTaskListClick}
         ></Sidebar>
         {display == "Profile" && <Profile profileClick={handleProfileClick} />}
-        {display == "Dashboard" && (
+        {display == "TaskForm" && (
           <div>
             <TaskForm addTask={addTask} />
+          </div>
+        )}
+        {display == "TaskList" && (
+          <div>
             <TaskList tasks={tasks} />
           </div>
         )}

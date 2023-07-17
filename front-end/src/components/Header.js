@@ -8,18 +8,31 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled, createTheme } from "@mui/material/styles";
 
 const pages = ["Add Tasks", "Assign Tasks", "Your tasks"];
 // const settings = ['Profile', 'Logout'];
 
-function Header({ sidebarWidth, open, handleSidebarOpen, profileClick, handleiDashboardClick }) {
-  const theme = useTheme();
+function Header({ sidebarWidth, open, handleSidebarOpen, profileClick }) {
+  const theme = createTheme({
+    status: {
+      danger: '#e53e3e',
+    },
+    palette: {
+      primary: {
+        main: '#18a27a',
+        darker: '#053e85',
+      },
+      neutral: {
+        main: '#64748B',
+        contrastText: '#fff',
+      },
+    },
+  });
+
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -63,7 +76,7 @@ function Header({ sidebarWidth, open, handleSidebarOpen, profileClick, handleiDa
   //   const AppBar = MuiAppBar;
 
   return (
-    <AppBar position="fixed" open={open}>
+    <AppBar position="fixed" theme={theme} open={open} color="primary">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -129,9 +142,6 @@ function Header({ sidebarWidth, open, handleSidebarOpen, profileClick, handleiDa
                 <Typography textAlign="center" onClick={profileClick}>
                   {"Profile"}
                 </Typography>
-              </MenuItem>
-              <MenuItem key={"Dashboard"} onClick={handleiDashboardClick}>
-                <Typography textAlign="center">{"Dashboard"}</Typography>
               </MenuItem>
               <MenuItem key={"Logout"} onClick={logout}>
                 <Typography textAlign="center">{"Logout"}</Typography>

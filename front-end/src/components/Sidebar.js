@@ -23,7 +23,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Sidebar({ sidebarWidth, open, handleSidebarClose }) {
+export default function Sidebar({ sidebarWidth, open, handleSidebarClose, handleTaskFormClick, handleTaskListClick }) {
   const theme = useTheme();
 
   return (
@@ -52,7 +52,7 @@ export default function Sidebar({ sidebarWidth, open, handleSidebarClose }) {
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <InboxIcon />
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -61,16 +61,23 @@ export default function Sidebar({ sidebarWidth, open, handleSidebarClose }) {
         </List>
         <Divider />
         <List>
-          {['Add Tasks', 'Task List'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem key='Add Tasks' disablePadding onClick={handleTaskFormClick}>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary='Add Tasks' />
               </ListItemButton>
             </ListItem>
-          ))}
+
+            <ListItem key='Task List' disablePadding onClick={handleTaskListClick}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <InboxIcon />
+                </ListItemIcon>
+                <ListItemText primary='Task List' />
+              </ListItemButton>
+            </ListItem>
         </List>
       </Drawer>
     </Box>
