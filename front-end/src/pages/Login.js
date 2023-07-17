@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/styles.css"
-import {setCookie, getCookieValue} from "../Utility/token_functions"
+import {setCookie, setObjectCookie} from "../Utility/token_functions"
 import Loading from "../components/Loading";
 
 import Button from "@mui/material/Button";
@@ -55,6 +55,7 @@ export default function Login(params) {
       if (generateOtp_response.status == 200) {
         setError("");
         setCookie("token", generateOtp_response.data.token, 1);
+        setObjectCookie("user", generateOtp_response.data.user, 1);
         window.location.href = "/";
       } else {
         setError("OTP Not Valid!");
@@ -138,87 +139,76 @@ export default function Login(params) {
     <div>
       {loading && <Loading />}
       {showLogin ? 
-      <Container component="main" maxWidth="sm">
-      <Box
-        sx={{
-          boxShadow: 3,
-          borderRadius: 2,
-          px: 4,
-          py: 6,
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="username"
-            label="Username"
-            name="username"
-            autoComplete="username"
-            autoFocus
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {error && <div style={{ color: 'red' }}>{error}</div>}
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+        <Container component="main" maxWidth="sm">
+          <Box
+            sx={{
+              boxShadow: 3,
+              borderRadius: 2,
+              px: 4,
+              py: 6,
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </Box>
-      </Box>
-    </Container>
+            <Typography component="h1" variant="h5">
+              Sign in
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {error && <div style={{ color: 'red' }}>{error}</div>}
+              <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign In
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
         :
-        // <div className="container">
-        //   <div  className="card">
-        //       <form onSubmit={handleSubmitOtp} className="box">
-        //           <h2>OTP Verification</h2>
-        //           <p className="ss">OTP has been sent to your Email!</p>
-        //           <input type="text" value={otp} onChange={handleOtpChange} />
-        //           {error && <div style={{ color: 'red' }}>{error}</div>}
-        //           <button type="submit" disabled={!enableOtpButton}>Verify OTP</button>
-        //       </form>
-        //   </div>
-        // </div>
         <Container component="main" maxWidth="sm">
           <Box
             sx={{
