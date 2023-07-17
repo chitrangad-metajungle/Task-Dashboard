@@ -10,6 +10,20 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
   const [selectedUser, setSelectedUser] = useState("");
   const [assignedTo, setAssignedTo] = useState(task.assignedTo);
   const [users, setUsers] = useState(usersArr);
+  const [initialName, setInitialName] = useState("");
+
+  const getInitials = (name) => {
+    const names = name.split(" ");
+    let initials = "";
+    names.forEach((n) => {
+      initials += n[0];
+    });
+    return initials;
+  };
+
+  useEffect(() => {
+    setInitialName(getInitials(assignedTo));
+  }, [assignedTo]);
 
   useEffect(() => {
     setUsers(usersArr);
@@ -48,11 +62,18 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
       onClick={handleTaskItemClick}
     >
       <div>
-            <span><h3 className = "task__tags"><span class='task__tag task__tag--illustration'>{task.project}</span></h3></span>
-            <span class='task__owner'></span>
-          </div>
+        <span>
+          <h3 className="task__tags">
+            <span class="task__tag task__tag--illustration">
+              {task.project}
+            </span>
+          </h3>
+        </span>
+        <span class="task__owner">
+          {initialName !== "undefined" ? initialName.toUpperCase() : "NA"}
+        </span>
+      </div>
 
-      
       <br></br>
       <p>
         <Link to={`/tasks/${task.title}`}>{task.title}</Link>
@@ -62,23 +83,28 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
         <strong>Project:{task.project}</strong>
       </p> */}
       <br></br>
-      <p>
-        Assigned To:{assignedTo}
-      </p>
+      <p>Assigned To:{assignedTo}</p>
       <br></br>
-      <p>
-        Completion Date:{task.completionDate}
-      </p>
+      <p>Completion Date:{task.completionDate}</p>
       <br></br>
       <div>
         {task.priority === "red" && (
-          <span className = "bar" style={{ backgroundColor: "blue" ,width: "100%"  }}></span>
+          <span
+            className="bar"
+            style={{ backgroundColor: "blue", width: "100%" }}
+          ></span>
         )}
         {task.priority === "yellow" && (
-          <span className = "bar" style={{ backgroundColor: "yellow" ,width: "100%" }}></span>
+          <span
+            className="bar"
+            style={{ backgroundColor: "yellow", width: "100%" }}
+          ></span>
         )}
         {task.priority === "blue" && (
-          <span className = "bar" style={{ backgroundColor: "blue" ,width: "100%" }}></span>
+          <span
+            className="bar"
+            style={{ backgroundColor: "blue", width: "100%" }}
+          ></span>
         )}
       </div>
       <div>
@@ -89,7 +115,7 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
           x
         </button>
       </div>
-      
+
       {showModal && (
         <div
           style={{
