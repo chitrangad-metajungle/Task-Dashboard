@@ -39,6 +39,7 @@ export default function Profile({ closeFunction }) {
       <div id="initial">{getInitials(username).toUpperCase()}</div>
       <div className="profileItem">{username}</div>
       <div className="profileItem">{email}</div>
+      <a>reset password</a>
     </div>
   );
 }
