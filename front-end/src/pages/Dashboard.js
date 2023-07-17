@@ -7,7 +7,7 @@ import "../styles/kanban.css";
 import { getCookieValue } from "../Utility/token_functions";
 import Profile from "../components/Profile";
 
-const sidebarWidth = 240
+const sidebarWidth = 240;
 
 const Dashboard = ({ addTask, tasks }) => {
   const [display, setDisplay] = useState("Dashboard");
@@ -28,7 +28,6 @@ const Dashboard = ({ addTask, tasks }) => {
     // }
   }, []);
 
-
   const handleSidebarOpen = () => {
     setOpen(true);
   };
@@ -38,21 +37,26 @@ const Dashboard = ({ addTask, tasks }) => {
   };
 
   return (
-    <div>
-      <Header sidebarWidth={sidebarWidth} open={open} handleSidebarOpen={handleSidebarOpen} profileClick={handleProfileClick} handleiDashboardClick={handleiDashboardClick}></Header>
-      <div className="dashboard_container">
-        
-        <Sidebar sidebarWidth={sidebarWidth} open={open} handleSidebarClose={handleSidebarClose} handleiDashboardClick={handleiDashboardClick}></Sidebar>
-        {display=="Profile" && <Profile profileClick={handleProfileClick} />}
-        {
-          display=="Dashboard" && 
-          <div>
-            <TaskForm addTask={addTask} />
-            <TaskList tasks={tasks} />
-          </div>
-        }
-        
-      </div>
+    <div className="dashboard_container">
+      <Header
+        sidebarWidth={sidebarWidth}
+        open={open}
+        handleSidebarOpen={handleSidebarOpen}
+        profileClick={handleProfileClick}
+        handleiDashboardClick={handleiDashboardClick}
+      ></Header>
+      <Sidebar
+        sidebarWidth={sidebarWidth}
+        open={open}
+        handleSidebarClose={handleSidebarClose}
+      ></Sidebar>
+      {displayProfile && <Profile />}
+      {displayDashboard && (
+        <div>
+          <TaskForm addTask={addTask} />
+          <TaskList tasks={tasks} />
+        </div>
+      )}
     </div>
   );
 };

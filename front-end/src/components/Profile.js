@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/profile.css";
 import { getCookieValue } from "../Utility/token_functions";
 
-export default function Profile({ closeFunction }) {
+export default function Profile() {
   const [username, setUsername] = useState("N/A");
   const [email, setEmail] = useState("N/A");
 
@@ -17,12 +17,35 @@ export default function Profile({ closeFunction }) {
     setEmail(userInfo.email);
   }, []);
 
+  const getInitials = (name) => {
+    const names = name.split(" ");
+    let initials = "";
+    names.forEach((n) => {
+      initials += n[0];
+    });
+    return initials;
+  };
+
   return (
     <div id="profileContainer">
-      <h1 id="profileTitle">Profile</h1>
-      <div id="initial">K</div>
-      <div className="profileItem">{username}</div>
-      <div className="profileItem">{email}</div>
+      <div class="coffee-container">
+        <div class="coffee">
+          <div class="coffee-top"></div>
+          <div class="coffee-body">
+            <h1>But first, coffee</h1>
+          </div>
+        </div>
+      </div>
+      <div id="initial">{getInitials(username).toUpperCase()}</div>
+      <div className="profileItemRowContainer">
+        <div>Username:</div>
+        <div className="profileItem">{username}</div>
+      </div>
+      <div className="profileItemRowContainer">
+        <div>Email:</div>
+        <div className="profileItem">{email}</div>
+      </div>
+      <a id="resetPassword">reset password</a>
     </div>
   );
 }

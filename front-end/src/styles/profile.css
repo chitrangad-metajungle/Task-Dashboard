@@ -6,7 +6,7 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: #ffffff;
+  background-color: #f3fff9;
   padding: 0;
   margin: 0;
   left: 0;
@@ -15,11 +15,11 @@
 #profileTitle {
   font-size: 40px;
   font-weight: 600;
+  font-family: "roboto";
   margin: 0;
   padding: 10px;
   padding-top: 0;
-  background-color: rgb(255, 255, 255);
-  color: rgb(15, 11, 11);
+  color: #070808;
   border-radius: 10px;
 }
 
@@ -31,7 +31,7 @@
   margin: 20px;
   padding: 10px;
   border-radius: 10px;
-  background-color: #f6f6f6;
+  background-color: #ffffff;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -41,10 +41,109 @@
   height: 150px;
   width: 150px;
   margin: 50px;
-  background-color: black;
+  background-color: #18a27a;
   color: white;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.profileItemRowContainer {
+  justify-content: space-between;
+  align-items: center;
+  color: #070808;
+}
+
+/* @import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap"); */
+
+body {
+  background-color: #3f4441;
+}
+
+.coffee-container {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 30vh;
+  left: 80vw;
+}
+
+.coffee {
+  width: 172px;
+  position: relative;
+}
+
+.coffee-top {
+  position: absolute;
+  width: 100%;
+  height: 45px;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 12px;
+    width: 75%;
+    border-bottom: 25px solid #c7b198;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    background-color: #dfd3c3;
+    border-radius: 3px;
+  }
+}
+
+.coffee-body {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+
+  &:before {
+    content: "";
+    display: block;
+    width: 54%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-bottom: 189px solid #bac7a7;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    transform: rotate(180deg);
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 33px;
+    left: 0;
+    right: 0;
+    width: 70%;
+    margin: auto;
+    border-bottom: 93px solid #be9468;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    transform: rotate(180deg);
+  }
+}
+
+h1 {
+  font-size: 16px;
+  font-family: "Bad Script", cursive;
+  color: #fff;
+  text-align: center;
+  position: absolute;
+  top: 30px;
+  left: 26px;
+  z-index: 9;
 }
