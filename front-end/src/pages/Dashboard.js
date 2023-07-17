@@ -55,8 +55,8 @@ const Dashboard = ({ addTask, tasks }) => {
           handleSidebarClose={handleSidebarClose}
           handleiDashboardClick={handleiDashboardClick}
         ></Sidebar>
-        {displayProfile && <Profile profileClick={handleProfileClick} />}
-        {displayDashboard && (
+        {display == "Profile" && <Profile profileClick={handleProfileClick} />}
+        {display == "Dashboard" && (
           <div>
             <TaskForm addTask={addTask} />
             <TaskList tasks={tasks} />
