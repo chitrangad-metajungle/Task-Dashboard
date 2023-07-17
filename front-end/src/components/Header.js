@@ -18,7 +18,7 @@ import { styled, useTheme } from "@mui/material/styles";
 const pages = ["Add Tasks", "Assign Tasks", "Your tasks"];
 // const settings = ['Profile', 'Logout'];
 
-function Header({ sidebarWidth, open, handleSidebarOpen, profileClick }) {
+function Header({ sidebarWidth, open, handleSidebarOpen, profileClick, handleiDashboardClick }) {
   const theme = useTheme();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -193,6 +193,9 @@ function Header({ sidebarWidth, open, handleSidebarOpen, profileClick }) {
                 <Typography textAlign="center" onClick={profileClick}>
                   {"Profile"}
                 </Typography>
+              </MenuItem>
+              <MenuItem key={"Dashboard"} onClick={handleiDashboardClick}>
+                <Typography textAlign="center">{"Dashboard"}</Typography>
               </MenuItem>
               <MenuItem key={"Logout"} onClick={logout}>
                 <Typography textAlign="center">{"Logout"}</Typography>

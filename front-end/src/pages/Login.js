@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "../styles/styles.css"
@@ -116,11 +116,13 @@ export default function Login(params) {
     });
   };
 
-  // console.log(getCookieValue('token'))
-  // if(getCookieValue('token')!=null && getCookieValue('token')!=undefined)
-  // {
-  //   window.location.href = "/";
-  // }
+  useEffect(() => {
+    // console.log(getCookieValue('token'))
+    if(getCookieValue('token')!=null && getCookieValue('token')!=undefined)
+    {
+      window.location.href = "/";
+    }
+  }, []);
 
   return (
     
