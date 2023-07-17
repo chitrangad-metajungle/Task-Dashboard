@@ -212,20 +212,20 @@ const TaskList = () => {
       <div>
         <h2>Task List</h2>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <input
+          <input className = "fieldInput"
             type="text"
             value={searchQuery}
             onChange={handleSearchInputChange}
             placeholder="Search tasks by title..."
           />
-          <input
+          <input className = "fieldInput"
             type="text"
             value={searchQueryProject}
             onChange={handleSearchInputChangeProject}
             placeholder="Search tasks by project..."
           />
 
-          <select onChange={(e) => setSelectedUser(e.target.value)}>
+          <select className = "fieldInput" onChange={(e) => setSelectedUser(e.target.value)}>
             <option value="">All Users</option>
             {users.map((user) => {
               return (

@@ -14,7 +14,7 @@
     --tag-3-text:#2d86ba;
     --tag-4:#f2dcf5;
     --tag-4-text:#a734ba;
-    --purple:#7784ee;
+    --purple:#18A27A;
     background: #f3fff9;
 
   }
@@ -185,9 +185,13 @@
       border-radius:100rem;
       background:var(--purple);
       position:absolute;
-      display:inline-block;
+      display:flex;
+      font-weight: bold;
       right:1rem;
-      text-decoration-color: var(--white);
+      color: #ffffff;
+      justify-content: center;
+      align-items: center;
+    
     //   bottom:0;
       
     }
@@ -373,3 +377,5 @@
   .container{
     font-size: 8px;
   }
+
+ 

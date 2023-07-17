@@ -70,7 +70,7 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
           </h3>
         </span>
         <span class="task__owner">
-          {initialName !== "undefined" ? initialName.toUpperCase() : "NA"}
+          <p style={{bottom:"5px", right: "35px"}}>{initialName !== "undefined" ? initialName.toUpperCase() : "NA"}</p>
         </span>
       </div>
 
