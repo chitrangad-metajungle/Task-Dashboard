@@ -10,9 +10,13 @@ const {
   deleteTask,
   updateTask,
 } = require("./controllers/taskController");
+const {
+  getAllProjects,
+  addProject,
+} = require("./controllers/projectController");
 const { connectToMongoDB } = require("./src/config/database");
 require("dotenv").config();
-const authenticateToken = require('./middlewares/authenticateToken');
+const authenticateToken = require("./middlewares/authenticateToken");
 
 const app = express();
 app.use(express.json()); // for parsing application/json
@@ -81,6 +85,26 @@ async function startServer() {
     } catch (error) {
       console.error(error);
       res.status(500).send("An error occurred while retrieving users");
+    }
+  });
+
+  app.get("/api/projects", async (req, res) => {
+    try {
+      const result = await getAllProjects();
+      res.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while retrieving projects");
+    }
+  });
+
+  app.post("/api/projects", async (req, res) => {
+    try {
+      const result = await addProject(req.body);
+      res.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while adding a project");
     }
   });
 

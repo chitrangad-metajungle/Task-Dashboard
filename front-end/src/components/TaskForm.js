@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {getCookieValue} from "../Utility/token_functions"
+import { getCookieValue } from "../Utility/token_functions";
 
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
@@ -12,6 +12,7 @@ const TaskForm = ({ addTask }) => {
 
   useEffect(() => {
     const storedProjectList = localStorage.getItem("projectList");
+    console.log(storedProjectList);
     if (storedProjectList) {
       setProjectList(JSON.parse(storedProjectList));
     }
@@ -21,12 +22,12 @@ const TaskForm = ({ addTask }) => {
     localStorage.setItem("projectList", JSON.stringify(projectList));
   }, [projectList]);
 
-  const token = getCookieValue('token'); // Replace 'getCookie' with your cookie retrieval logic
+  const token = getCookieValue("token"); // Replace 'getCookie' with your cookie retrieval logic
   const addTaskToDatabase = async (newTask) => {
     const response = await fetch("http://localhost:8000/api/tasks", {
       method: "POST",
       headers: {
-        "Authorization":`Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newTask),
