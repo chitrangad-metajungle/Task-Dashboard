@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import TaskList from '../components/TaskList';
 import TaskForm from '../components/TaskForm';
 import Header from '../components/Header';
 import '../styles/kanban.css'; 
-import "../styles/Dashboard.css"
 import {getCookieValue} from "../Utility/token_functions"
 
 const Dashboard = ({addTask, tasks}) => {
