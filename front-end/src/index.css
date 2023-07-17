@@ -2,15 +2,16 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  font-family: sans-serif;
-  background: linear-gradient(to left, #e1f5fe, #ffffff)
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'poppins', sans-serif;
+  /* background: linear-gradient(to left, #18a27a, #60da9f); */
+  background: #d3ffea;
 }
 
 h1, h2, h3, h4 {
   margin-bottom: 0.5rem;
-  color: #333;
+  /* color: #ffffff; */
 }
 
 form {

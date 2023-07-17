@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "../styles/modal.css";
+import "../styles/task.css";
+import "../styles/task2.scss";
 
 const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
   const [showModal, setShowModal] = useState(false);
@@ -41,18 +43,26 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
       className="task-item"
       onClick={handleTaskItemClick}
     >
-      <h3>
-        <Link to={`/tasks/${task.title}`}>{task.title}</Link>
+      <h3 className = "task__tags"><span class='task__tag task__tag--illustration'>
+      Project:{task.project}</span>
       </h3>
+      <br></br>
       <p>
-        <strong>Project:</strong> <strong>{task.project}</strong>
+        <strong><Link to={`/tasks/${task.title}`}>{task.title}</Link></strong>
       </p>
+      <br></br>
+      {/* <p>
+        <strong>Project:{task.project}</strong>
+      </p> */}
+      <br></br>
       <p>
         <strong>Assigned To:</strong> <strong>{assignedTo}</strong>
       </p>
+      <br></br>
       <p>
         <strong>Completion Date:</strong> <strong>{task.completionDate}</strong>
       </p>
+      <br></br>
       <div>
         {task.priority === "red" && (
           <button style={{ backgroundColor: "red" }}></button>

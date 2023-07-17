@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 import axios from "axios";
 import { setAxiosHeaders } from "../Utility/token_functions";
+import "../styles/task.css";
+import "../styles/task2.scss";
+
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -205,6 +208,7 @@ const TaskList = () => {
   // }
 
   return (
+    
     <div>
       <div>
         <h2>Task List</h2>
@@ -234,9 +238,10 @@ const TaskList = () => {
           </select>
         </div>
       </div>
-      <div className="kanban-board">
+{/* This is the kanban_board div */}
+      <div className="project-tasks"> 
         <div
-          className="column"
+          className="project-column "
           onDragOver={(e) => handleDragOver(e)}
           onDrop={(e) => handleDrop(e, "todo")}
         >
@@ -276,7 +281,7 @@ const TaskList = () => {
           })}
         </div>
         <div
-          className="column"
+          className="project-column"
           onDragOver={(e) => handleDragOver(e)}
           onDrop={(e) => handleDrop(e, "inProcess")}
         >
@@ -315,7 +320,7 @@ const TaskList = () => {
           })}
         </div>
         <div
-          className="column"
+          className="project-column"
           onDragOver={(e) => handleDragOver(e)}
           onDrop={(e) => handleDrop(e, "blockers")}
         >
@@ -354,7 +359,7 @@ const TaskList = () => {
           })}
         </div>
         <div
-          className="column"
+          className="project-column"
           onDragOver={(e) => handleDragOver(e)}
           onDrop={(e) => handleDrop(e, "verification")}
         >
@@ -393,7 +398,7 @@ const TaskList = () => {
           })}
         </div>
         <div
-          className="column"
+          className="project-column"
           onDragOver={(e) => handleDragOver(e)}
           onDrop={(e) => handleDrop(e, "completed")}
         >
