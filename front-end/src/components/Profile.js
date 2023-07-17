@@ -19,9 +19,10 @@ export default function Profile({ closeFunction }) {
 
   return (
     <div id="profileContainer">
-      <h1>Profile</h1>
-      <div className="profileItem">Username:{username}</div>
-      <div className="profileItem">EmailAddress:{email}</div>
+      <h1 id="profileTitle">Profile</h1>
+      <div id="initial">K</div>
+      <div className="profileItem">{username}</div>
+      <div className="profileItem">{email}</div>
     </div>
   );
 }

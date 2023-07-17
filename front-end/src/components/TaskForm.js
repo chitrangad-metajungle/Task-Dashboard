@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getCookieValue } from "../Utility/token_functions";
 import axios from "axios";
+import "../styles/task.css"
+import "../styles/task2.scss"
 
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState("");
