@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AppBar from '@mui/material/AppBar';
+// import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -12,11 +12,14 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import { styled, useTheme } from '@mui/material/styles';
 
 const pages = ['Add Tasks', 'Assign Tasks', 'Your tasks'];
 // const settings = ['Profile', 'Logout'];
 
-function Header() {
+function Header({sidebarWidth, open, handleSidebarOpen} ) {
+  const theme = useTheme();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -41,8 +44,26 @@ function Header() {
     window.location.href = '/login';
   };
 
+  const AppBar = styled(MuiAppBar, {
+    shouldForwardProp: prop => prop !== 'open',
+  })(({ theme, open }) => ({
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    ...(open && {
+      width: `calc(100% - ${sidebarWidth}px)`,
+      marginLeft: `${sidebarWidth}px`,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    }),
+  }));
+//   const AppBar = MuiAppBar;
+
   return (
-    <AppBar position="static">
+    <AppBar position="fixed" open={open}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -51,7 +72,8 @@ function Header() {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            onClick={handleSidebarOpen}
           >
             <MenuIcon />
           </IconButton>
