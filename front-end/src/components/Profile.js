@@ -17,10 +17,19 @@ export default function Profile({ closeFunction }) {
     setEmail(userInfo.email);
   }, []);
 
+  const getInitials = (name) => {
+    const names = name.split(" ");
+    let initials = "";
+    names.forEach((n) => {
+      initials += n[0];
+    });
+    return initials;
+  };
+
   return (
     <div id="profileContainer">
       <h1 id="profileTitle">Profile</h1>
-      <div id="initial">K</div>
+      <div id="initial">{getInitials(username).toUpperCase()}</div>
       <div className="profileItem">{username}</div>
       <div className="profileItem">{email}</div>
     </div>
