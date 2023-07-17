@@ -11,6 +11,19 @@ export const getCookieValue = (name) => {
   return null;
 };
 
+export const setObjectCookie = (name, object, daysToExpire) => {
+  const json = JSON.stringify(object);
+  let expires = '';
+
+  if (daysToExpire) {
+    const date = new Date();
+    date.setTime(date.getTime() + (daysToExpire * 24 * 60 * 60 * 1000));
+    expires = `expires=${date.toUTCString()};`;
+  }
+
+  document.cookie = `${name}=${json};${expires}path=/`;
+};
+
 export const setCookie = (name, value, expirationDays) => {
   const date = new Date();
   date.setTime(date.getTime() + expirationDays * 24 * 60 * 60 * 1000);
