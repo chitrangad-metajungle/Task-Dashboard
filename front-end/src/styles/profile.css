@@ -1,0 +1,19 @@
+#profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #e8e1e1;
+}
+
+#closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+  font-size: 15px;
+  color: #ffffff;
+  cursor: pointer;
+}

@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 // import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import { styled, useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Menu from "@mui/material/Menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import AdbIcon from "@mui/icons-material/Adb";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { styled, useTheme } from "@mui/material/styles";
 
-const pages = ['Add Tasks', 'Assign Tasks', 'Your tasks'];
+const pages = ["Add Tasks", "Assign Tasks", "Your tasks"];
 // const settings = ['Profile', 'Logout'];
 
-function Header({sidebarWidth, open, handleSidebarOpen} ) {
+function Header({ sidebarWidth, open, handleSidebarOpen, profileClick }) {
   const theme = useTheme();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -40,27 +40,27 @@ function Header({sidebarWidth, open, handleSidebarOpen} ) {
 
   const logout = () => {
     // Delete the token cookie by setting an expired date in the past
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    window.location.href = '/login';
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "/login";
   };
 
   const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: prop => prop !== 'open',
+    shouldForwardProp: (prop) => prop !== "open",
   })(({ theme, open }) => ({
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     ...(open && {
       width: `calc(100% - ${sidebarWidth}px)`,
       marginLeft: `${sidebarWidth}px`,
-      transition: theme.transitions.create(['margin', 'width'], {
+      transition: theme.transitions.create(["margin", "width"], {
         easing: theme.transitions.easing.easeOut,
         duration: theme.transitions.duration.enteringScreen,
       }),
     }),
   }));
-//   const AppBar = MuiAppBar;
+  //   const AppBar = MuiAppBar;
 
   return (
     <AppBar position="fixed" open={open}>
@@ -72,7 +72,7 @@ function Header({sidebarWidth, open, handleSidebarOpen} ) {
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
+            sx={{ mr: 2, ...(open && { display: "none" }) }}
             onClick={handleSidebarOpen}
           >
             <MenuIcon />
@@ -84,18 +84,18 @@ function Header({sidebarWidth, open, handleSidebarOpen} ) {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             Task Dashboard
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -110,18 +110,18 @@ function Header({sidebarWidth, open, handleSidebarOpen} ) {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
               {pages.map((page) => (
@@ -131,7 +131,7 @@ function Header({sidebarWidth, open, handleSidebarOpen} ) {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -139,23 +139,23 @@ function Header({sidebarWidth, open, handleSidebarOpen} ) {
             href=""
             sx={{
               mr: 2,
-              display: { xs: 'flex', md: 'none' },
+              display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
             }}
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
@@ -169,17 +169,17 @@ function Header({sidebarWidth, open, handleSidebarOpen} ) {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: "45px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
@@ -189,12 +189,14 @@ function Header({sidebarWidth, open, handleSidebarOpen} ) {
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))} */}
-                <MenuItem key={"Profile"}>
-                    <Typography textAlign="center">{"Profile"}</Typography>
-                </MenuItem>
-                <MenuItem key={"Logout"} onClick={logout}>
-                    <Typography textAlign="center">{"Logout"}</Typography>
-                </MenuItem>
+              <MenuItem key={"Profile"}>
+                <Typography textAlign="center" onClick={profileClick}>
+                  {"Profile"}
+                </Typography>
+              </MenuItem>
+              <MenuItem key={"Logout"} onClick={logout}>
+                <Typography textAlign="center">{"Logout"}</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

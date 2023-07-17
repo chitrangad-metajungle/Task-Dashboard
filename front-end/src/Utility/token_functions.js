@@ -1,9 +1,9 @@
 export const getCookieValue = (name) => {
-  const cookies = document.cookie.split(';');
+  const cookies = document.cookie.split(";");
 
   for (let i = 0; i < cookies.length; i++) {
     const cookie = cookies[i].trim();
-    if (cookie.startsWith(name + '=')) {
+    if (cookie.startsWith(name + "=")) {
       return cookie.substring(name.length + 1);
     }
   }
@@ -13,23 +13,21 @@ export const getCookieValue = (name) => {
 
 export const setCookie = (name, value, expirationDays) => {
   const date = new Date();
-  date.setTime(date.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
+  date.setTime(date.getTime() + expirationDays * 24 * 60 * 60 * 1000);
   const expires = "expires=" + date.toUTCString();
   document.cookie = name + "=" + value + ";" + expires + ";path=/";
 };
 
 export const setAxiosHeaders = (axios) => {
-
-  const token = getCookieValue('token') || "test_token";
+  const token = getCookieValue("token") || "test_token";
 
   if (token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   } else {
     resetAxiosHeaders();
   }
-
-}
+};
 
 export const resetAxiosHeaders = (axios) => {
-  delete axios.defaults.headers.common['Authorization'];
+  delete axios.defaults.headers.common["Authorization"];
 };

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
-import TaskList from '../components/TaskList';
-import TaskForm from '../components/TaskForm';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import '../styles/kanban.css'; 
-import {getCookieValue} from "../Utility/token_functions"
+import TaskList from "../components/TaskList";
+import TaskForm from "../components/TaskForm";
+import Header from "../components/Header";
+import "../styles/kanban.css";
+import { getCookieValue } from "../Utility/token_functions";
+import Profile from "../components/Profile";
 
-const sidebarWidth = 240;
+const Dashboard = ({ addTask, tasks }) => {
+  const [displayProfile, setDisplayProfile] = useState(false);
 
-const Dashboard = ({addTask, tasks}) => {
+  const handleProfileClick = () => {
+    setDisplayProfile(!displayProfile);
+  };
 
   useEffect(() => {
     // if(getCookieValue('token')==null || getCookieValue('token')==undefined)
@@ -28,11 +31,16 @@ const Dashboard = ({addTask, tasks}) => {
   };
 
   return (
-    <div className='dashboard_container'>
-      <Header sidebarWidth={sidebarWidth} open={open} handleSidebarOpen={handleSidebarOpen}></Header>
-      <Sidebar sidebarWidth={sidebarWidth} open={open} handleSidebarClose={handleSidebarClose}></Sidebar>
-      <TaskForm addTask={addTask} />
-      <TaskList  tasks={tasks} />
+    <div className="dashboard_container">
+      <Header profileClick={handleProfileClick} />
+      {displayProfile ? (
+        <Profile profileClick={handleProfileClick} />
+      ) : (
+        <div>
+          <TaskForm addTask={addTask} />
+          <TaskList tasks={tasks} />
+        </div>
+      )}
     </div>
   );
 };
