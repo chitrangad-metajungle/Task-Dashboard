@@ -10,7 +10,7 @@ import Profile from "../components/Profile";
 const sidebarWidth = 240;
 
 const Dashboard = ({ addTask, tasks }) => {
-  const [display, setDisplay] = useState(false);
+  const [display, setDisplay] = useState("Dashboard");
   const [open, setOpen] = useState(false);
 
   const handleProfileClick = () => {
