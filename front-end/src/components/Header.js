@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = ['Add Tasks', 'Assign Tasks', 'Your tasks'];
-const settings = ['Profile', 'Logout'];
+// const settings = ['Profile', 'Logout'];
 
 function Header() {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -162,11 +162,17 @@ function Header() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={logout}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+                <MenuItem key={"Profile"}>
+                    <Typography textAlign="center">{"Profile"}</Typography>
+                </MenuItem>
+                <MenuItem key={"Logout"} onClick={logout}>
+                    <Typography textAlign="center">{"Logout"}</Typography>
+                </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
