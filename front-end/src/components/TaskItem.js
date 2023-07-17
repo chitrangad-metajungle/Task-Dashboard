@@ -47,12 +47,15 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
       className="task-item"
       onClick={handleTaskItemClick}
     >
-      <h3 className = "task__tags"><span class='task__tag task__tag--illustration'>
-      Project:{task.project}</span>
-      </h3>
+      <div>
+            <span><h3 className = "task__tags"><span class='task__tag task__tag--illustration'>{task.project}</span></h3></span>
+            <span class='task__owner'></span>
+          </div>
+
+      
       <br></br>
       <p>
-        <strong><Link to={`/tasks/${task.title}`}>{task.title}</Link></strong>
+        <Link to={`/tasks/${task.title}`}>{task.title}</Link>
       </p>
       <br></br>
       {/* <p>
@@ -60,22 +63,22 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
       </p> */}
       <br></br>
       <p>
-        <strong>Assigned To:</strong> <strong>{assignedTo}</strong>
+        Assigned To:{assignedTo}
       </p>
       <br></br>
       <p>
-        <strong>Completion Date:</strong> <strong>{task.completionDate}</strong>
+        Completion Date:{task.completionDate}
       </p>
       <br></br>
       <div>
         {task.priority === "red" && (
-          <button style={{ backgroundColor: "red" }}></button>
+          <span className = "bar" style={{ backgroundColor: "blue" ,width: "100%"  }}></span>
         )}
         {task.priority === "yellow" && (
-          <button style={{ backgroundColor: "yellow" }}></button>
+          <span className = "bar" style={{ backgroundColor: "yellow" ,width: "100%" }}></span>
         )}
         {task.priority === "blue" && (
-          <button style={{ backgroundColor: "blue" }}></button>
+          <span className = "bar" style={{ backgroundColor: "blue" ,width: "100%" }}></span>
         )}
       </div>
       <div>
@@ -86,6 +89,7 @@ const TaskItem = ({ task, deleteTask, updateTask, usersArr }) => {
           x
         </button>
       </div>
+      
       {showModal && (
         <div
           style={{

@@ -15,7 +15,7 @@
     --tag-4:#f2dcf5;
     --tag-4-text:#a734ba;
     --purple:#7784ee;
-    background: #d3ffea;
+    background: #e4fdf1;
 
   }
   *{
@@ -42,7 +42,7 @@
   }
   
   h1 {
-    font-size:30px;
+    font-size:18px;
   }
   .project {
     padding:2rem;
@@ -77,7 +77,7 @@
         
         &:after {
           content:'+';
-          font-size:15px;
+          font-size:10px;
           color:rgb(150,150,150);
           
         }
@@ -129,13 +129,13 @@
     
     
     p {
-      font-size:15px;
+      font-size:12px;
       margin:1.2rem 0;
     }
     &__tag {
       border-radius:100px;
       padding:2px 13px;
-      font-size:14px;
+      font-size:10px;
       
       &--copyright {
         color:var(--tag-4-text);
@@ -180,14 +180,15 @@
     }
     
     &__owner {
-      width:25px;
-      height:25px;
+      width:45px;
+      height:45px;
       border-radius:100rem;
       background:var(--purple);
       position:absolute;
       display:inline-block;
-      right:0;
-      bottom:0;
+      right:1rem;
+      text-decoration-color: var(--white);
+    //   bottom:0;
       
     }
   }
@@ -207,7 +208,7 @@
   .tag-progress {
     margin:1.5rem 0;
     h2 {
-      font-size:16px;
+      font-size:1px;
       margin-bottom:1rem;
     }
     p {
@@ -269,7 +270,7 @@
   
   .task-activity {
      h2 {
-      font-size:16px;
+      font-size:12px;
       margin-bottom:1rem;
     }
     
@@ -365,6 +366,6 @@
       flex-basis:100%;
     }
     h1 {
-      font-size:25px;
+      font-size:20px;
     }
   }
