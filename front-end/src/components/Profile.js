@@ -28,7 +28,14 @@ export default function Profile({ closeFunction }) {
 
   return (
     <div id="profileContainer">
-      <h1 id="profileTitle">Profile</h1>
+      <div class="coffee-container">
+        <div class="coffee">
+          <div class="coffee-top"></div>
+          <div class="coffee-body">
+            <h1>But first, coffee</h1>
+          </div>
+        </div>
+      </div>
       <div id="initial">{getInitials(username).toUpperCase()}</div>
       <div className="profileItem">{username}</div>
       <div className="profileItem">{email}</div>
