@@ -23,7 +23,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function Sidebar({ sidebarWidth, open, handleSidebarClose, handleiDashboardClick }) {
+export default function Sidebar({ sidebarWidth, open, handleSidebarClose }) {
   const theme = useTheme();
 
   return (
@@ -48,14 +48,16 @@ export default function Sidebar({ sidebarWidth, open, handleSidebarClose, handle
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem key='My Tasks' disablePadding onClick={handleiDashboardClick}>
+          {['My Tasks'].map((text, index) => (
+            <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <InboxIcon />
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText primary='My Tasks' />
+                <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
+          ))}
         </List>
         <Divider />
         <List>

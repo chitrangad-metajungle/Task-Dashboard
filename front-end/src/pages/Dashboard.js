@@ -10,15 +10,18 @@ import Profile from "../components/Profile";
 const sidebarWidth = 240
 
 const Dashboard = ({ addTask, tasks }) => {
-  const [display, setDisplay] = useState("Dashboard");
+  const [displayProfile, setDisplayProfile] = useState(false);
+  const [displayDashboard, setDisplayDashboard] = useState(true);
   const [open, setOpen] = useState(false);
 
   const handleProfileClick = () => {
-    setDisplay("Profile");
+    setDisplayProfile(true);
+    setDisplayDashboard(false);
   };
 
   const handleiDashboardClick = () => {
-    setDisplay("Dashboard");
+    setDisplayDashboard(true);
+    setDisplayProfile(false);
   };
 
   useEffect(() => {
@@ -38,21 +41,18 @@ const Dashboard = ({ addTask, tasks }) => {
   };
 
   return (
-    <div>
+    <div className="dashboard_container">
       <Header sidebarWidth={sidebarWidth} open={open} handleSidebarOpen={handleSidebarOpen} profileClick={handleProfileClick} handleiDashboardClick={handleiDashboardClick}></Header>
-      <div className="dashboard_container">
-        
-        <Sidebar sidebarWidth={sidebarWidth} open={open} handleSidebarClose={handleSidebarClose} handleiDashboardClick={handleiDashboardClick}></Sidebar>
-        {display=="Profile" && <Profile profileClick={handleProfileClick} />}
-        {
-          display=="Dashboard" && 
-          <div>
-            <TaskForm addTask={addTask} />
-            <TaskList tasks={tasks} />
-          </div>
-        }
-        
-      </div>
+      <Sidebar sidebarWidth={sidebarWidth} open={open} handleSidebarClose={handleSidebarClose}></Sidebar>
+      {displayProfile && <Profile profileClick={handleProfileClick} />}
+      {
+        displayDashboard && 
+        <div>
+          <TaskForm addTask={addTask} />
+          <TaskList tasks={tasks} />
+        </div>
+      }
+       
     </div>
   );
 };
