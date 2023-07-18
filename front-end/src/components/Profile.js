@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/profile.css";
 import { getCookieValue } from "../Utility/token_functions";
 
-export default function Profile({ closeFunction }) {
+export default function Profile() {
   const [username, setUsername] = useState("N/A");
   const [email, setEmail] = useState("N/A");
 
