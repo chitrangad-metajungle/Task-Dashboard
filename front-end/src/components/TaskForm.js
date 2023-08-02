@@ -4,7 +4,35 @@ import axios from "axios";
 import "../styles/task.css"
 import "../styles/task2.scss"
 
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import Checkbox from "@mui/material/Checkbox";
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
+
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 const TaskForm = ({ addTask }) => {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#18a27a',
+        darker: '#053e85',
+      }
+    },
+  });
+  
   const [title, setTitle] = useState("");
   const [completionDate, setCompletionDate] = useState("");
   const [priority, setPriority] = useState("");
@@ -153,115 +181,137 @@ const TaskForm = ({ addTask }) => {
 
   return (
     <div>
-      <h2>Add New Task</h2>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">
-          <h4>Title:</h4>
-        </label>
-        <input
-          style={{ marginBottom: "-5px", marginTop: "1px" }}
-          type="text"
-          id="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-
-        <label htmlFor="project">
-          <h4>Project:</h4>
-        </label>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <select
-            style={{ marginBottom: "-5px", marginTop: "1px" }}
-            id="project"
-            value={project}
-            onChange={handleProjectChange}
-            required
-          >
-            <option value="">Select Project</option>
-            {projectList.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          {showNewProjectInput ? (
-            <input
-              type="text"
-              placeholder="New Project"
-              value={project}
-              onChange={handleProjectChange}
-              onKeyPress={handleKeyPress}
-            />
-          ) : (
-            <span
-              style={{
-                marginBottom: "-7px",
-                marginLeft: "7px",
-                cursor: "pointer",
-                color: "#097969",
-                fontSize: "10px",
+      <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="sm">
+          <Box
+              sx={{
+              boxShadow: 3,
+              borderRadius: 2,
+              px: 4,
+              py: 6,
+              marginTop: 8,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
               }}
-              onClick={handleAddNewProject}
-            >
-              Add New Project
-            </span>
-          )}
-        </div>
-
-        <label htmlFor="completionDate">
-          <h4>Completion Date:</h4>
-        </label>
-        <input
-          style={{ marginBottom: "-5px", marginTop: "1px" }}
-          type="date"
-          id="completionDate"
-          value={completionDate}
-          onChange={(e) => setCompletionDate(e.target.value)}
-          required
-        />
-
-        <label htmlFor="priority">
-          <h4>Priority:</h4>
-        </label>
-        <select
-          style={{ marginBottom: "-5px", marginTop: "1px" }}
-          id="priority"
-          value={priority}
-          onChange={(e) => setPriority(e.target.value)}
-          required
-        >
-          <option value="">Select Priority</option>
-          <option value="red">Red (highest)</option>
-          <option value="yellow">Yellow</option>
-          <option value="blue">Blue (lowest)</option>
-        </select>
-
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <label
-            style={{
-              marginRight: "-210px",
-              marginBottom: "10px",
-              marginTop: "-1px",
-            }}
-            htmlFor="autoAssign"
           >
-            <h4>Auto Assign Task</h4>
-          </label>
-          <input
-            style={{
-              marginBottom: "-2px",
-              marginTop: "1px",
-              marginLeft: "77px",
-            }}
-            type="checkbox"
-            id="autoAssign"
-            checked={autoAssign}
-            onChange={() => setAutoAssign(!autoAssign)}
-          />
-        </div>
-        <button type="submit">Add Task</button>
-      </form>
+              {/* <Typography component="h1" variant="h5"> */}
+                Add New Task
+              {/* </Typography> */}
+              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="title"
+                    label="Title"
+                    name="title"
+                    autoComplete="title"
+                    autoFocus
+                    value={title} 
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <FormControl sx={{ width: 300 }}>
+                  <InputLabel id="demo-multiple-checkbox-label">Project:</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={project}
+                    label="Project"
+                    onChange={handleProjectChange}
+                    required
+                  >
+                    {projectList.map((option) => (
+                      <MenuItem key={option} value={option}>{option}</MenuItem>
+                    ))}
+                  </Select>
+                  {showNewProjectInput ? (
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="project"
+                      label="New Project"
+                      name="project"
+                      autoComplete="project"
+                      autoFocus
+                      placeholder="New Project"
+                      value={project}
+                      onChange={handleProjectChange}
+                      onKeyPress={handleKeyPress}
+                    />
+                  ) : (
+                    <span
+                      style={{
+                        marginBottom: "-7px",
+                        marginLeft: "7px",
+                        cursor: "pointer",
+                        color: "#097969",
+                        fontSize: "10px",
+                      }}
+                      onClick={handleAddNewProject}
+                    >
+                      Add New Project
+                    </span>
+                  )}
+                </FormControl>
+
+                <FormControl sx={{ m:1, width: 300 }}>
+                  <InputLabel id="demo-multiple-checkbox-label">Priority:</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={priority}
+                    label="Priority"
+                    onChange={(e) => setPriority(e.target.value)}
+                    required
+                  >
+                    <MenuItem key="" value="">Select Priority</MenuItem>
+                    <MenuItem key="red" value="red">Red (highest)</MenuItem>
+                    <MenuItem key="yellow" value="yellow">Yellow</MenuItem>
+                    <MenuItem key="blue" value="blue">Blue (lowest)</MenuItem>
+                  </Select>
+                </FormControl>
+                
+
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={['DatePicker']}>
+                    <DatePicker 
+                      id="completionDate"
+                      label="Completion Date" 
+                      value={completionDate}
+                      onChange={(e) => setCompletionDate(e.target.value)}
+                      required
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+
+                <FormControlLabel 
+                  control={
+                    <Checkbox 
+                      label="Auto Assign Task"
+                      type="checkbox"
+                      id="autoAssign"
+                      checked={autoAssign}
+                      onChange={() => setAutoAssign(!autoAssign)}
+                    />
+                  } 
+                  label="Auto Assign Task" 
+                />
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={handleAddNewProject}
+                >
+                    Add New Project
+                </Button>
+              </Box>
+            </Box>
+        </Container>
+      </ThemeProvider>
     </div>
   );
 };
